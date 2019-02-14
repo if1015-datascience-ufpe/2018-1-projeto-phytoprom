@@ -1,0 +1,1940 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Processamento}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{formula}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{smf}
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{n}{matplotlib}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{o}{\PYZpc{}} \PY{n}{matplotlib} \PY{n}{inline}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}Importando data frame da fatores de transcrição}
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{df.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n}{df}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'> (489, 5)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}             ID       Name                                             Matrix  \textbackslash{}
+        0    >MA0020.1       Dof2  [[1.         1.         1.         0.         {\ldots}   
+        1    >MA0021.1       Dof3  [[1.         1.         1.         0.         {\ldots}   
+        2    >MA0034.1       Gam1  [[0.16 0.4  0.12 0.92 1.   0.04 0.12 0.24 0.4 {\ldots}   
+        3    >MA0044.1      HMG-1  [[0.         0.         0.         0.         {\ldots}   
+        4    >MA0045.1    HMG-I/Y  [[0.21428571 0.5        0.64285714 0.21428571 {\ldots}   
+        5    >MA0053.1      MNB1A  [[1.  1.  1.  0.  0.2]\textbackslash{}n [0.  0.  0.  0.  0.6]{\ldots}   
+        6    >MA0054.1    myb.Ph3  [[0.27142857 0.91428571 0.9        0.05714286 {\ldots}   
+        7    >MA0064.1        PBF  [[1.     1.     1.     0.     0.0625]\textbackslash{}n [0.   {\ldots}   
+        8    >MA0082.1   squamosa  [[0.36666667 0.         0.8        0.53333333 {\ldots}   
+        9    >MA0096.1    bZIP910  [[0.42857143 0.         0.         1.         {\ldots}   
+        10   >MA0097.1    bZIP911  [[0.03030303 0.51515152 0.         0.         {\ldots}   
+        11   >MA0120.1        id1  [[0.04166667 0.125      0.04166667 0.         {\ldots}   
+        12   >MA0121.1      ARR10  [[0.93333333 0.         0.93333333 0.         {\ldots}   
+        13   >MA0123.1       abi4  [[0.         0.24489796 0.         0.         {\ldots}   
+        14   >MA0127.1       PEND  [[0.71428571 0.14285714 0.02380952 0.0952381  {\ldots}   
+        15   >MA0128.1     EmBP-1  [[0.69230769 0.07692308 1.         0.         {\ldots}   
+        16   >MA0129.1      TGA1A  [[0.26666667 0.86666667 0.         0.13333333 {\ldots}   
+        17   >MA0549.1       BZR2  [[0.23232323 0.41414141 0.         0.8989899  {\ldots}   
+        18   >MA0551.1        HY5  [[0.321875 0.3375   0.1625   0.028125 0.46875 {\ldots}   
+        19   >MA0552.1       PIF1  [[0.3245614  0.21929825 0.30701754 0.46491228 {\ldots}   
+        20   >MA0553.1        SMZ  [[0.         0.         0.         0.         {\ldots}   
+        21   >MA0554.1       SOC1  [[0.32432432 0.19369369 0.0731982  0.06981982 {\ldots}   
+        22   >MA0555.1        SVP  [[0.30434783 0.30434783 0.30434783 0.35869565 {\ldots}   
+        23   >MA0556.1        AP3  [[0.3161512  0.28865979 0.16494845 0.         {\ldots}   
+        24   >MA0557.1       FHY3  [[0.19574468 0.31914894 0.03829787 0.96170213 {\ldots}   
+        25   >MA0558.1        FLC  [[0.44       0.32727273 0.34545455 0.29818182 {\ldots}   
+        26   >MA0559.1         PI  [[0.27956989 0.10215054 0.63978495 0.80286738 {\ldots}   
+        27   >MA0560.1       PIF3  [[0.39848197 0.11005693 0.03605313 0.         {\ldots}   
+        28   >MA0561.1       PIF4  [[0.         1.         0.         0.14626866 {\ldots}   
+        29   >MA0562.1       PIF5  [[0.         0.         1.         0.         {\ldots}   
+        ..         {\ldots}        {\ldots}                                                {\ldots}   
+        459  >MA1396.1      GATA6  [[0.10791367 0.93764988 0.         1.         {\ldots}   
+        460  >MA1397.1  At1g74840  [[0.5        0.425      0.07666667 0.065      {\ldots}   
+        461  >MA1398.1  At5g47390  [[0.37562604 0.31719533 0.4624374  0.48414023 {\ldots}   
+        462  >MA1399.1  At5g08520  [[0.32441472 0.48829431 0.41471572 0.34949833 {\ldots}   
+        463  >MA1400.1  At1g19000  [[0.45409015 0.53255426 0.47078464 0.05509182 {\ldots}   
+        464  >MA1401.1       EPR1  [[0.42211055 0.70519263 0.99497487 1.         {\ldots}   
+        465  >MA1402.1       BPC6  [[0.12765957 0.09574468 0.06914894 0.07978723 {\ldots}   
+        466  >MA1403.1       BPC5  [[0.93137255 0.02941176 1.         0.01960784 {\ldots}   
+        467  >MA1404.1       BPC1  [[0.15213358 0.8961039  0.0148423  0.92949907 {\ldots}   
+        468  >MA0954.2      ATHB7  [[0.15333333 0.08833333 0.78833333 0.93333333 {\ldots}   
+        469  >MA1000.2     ERF105  [[0.24573379 0.25426621 0.28668942 0.3225256  {\ldots}   
+        470  >MA0586.2      SPL14  [[0.21440823 0.03945111 0.         0.         {\ldots}   
+        471  >MA1026.2     ATHB15  [[0.44915254 0.61525424 0.45423729 0.35932203 {\ldots}   
+        472  >MA0548.2      AGL15  [[0.22203673 0.08013356 0.02671119 0.14023372 {\ldots}   
+        473  >MA0550.2       BZR1  [[0.16156463 0.00680272 0.59693878 0.         {\ldots}   
+        474  >MA1059.2       SPL5  [[0.40802676 0.45652174 0.17056856 0.04180602 {\ldots}   
+        475  >MA1405.1      SIZF2  [[0.16191162 0.8838     0.00263997 0.03329    {\ldots}   
+        476  >MA1406.1      ATHB4  [[2.39200000e-02 8.22550000e-01 9.83480000e-01{\ldots}   
+        477  >MA1407.1     bZIP14  [[0.40640641 0.43756244 0.01698302 0.01698302 {\ldots}   
+        478  >MA1408.1    FaEOBII  [[0.45035    0.21068    0.01124011 0.02313    {\ldots}   
+        479  >MA1409.1     OsRR22  [[0.51257    0.8687     0.00486    0.97906979 {\ldots}   
+        480  >MA1410.1     StBRC1  [[0.11497885 0.02437    0.00419    0.04402    {\ldots}   
+        481  >MA1411.1      TSAR1  [[3.12613126e-01 3.30000000e-02 1.25451255e-01{\ldots}   
+        482  >MA1412.1      TSAR2  [[1.76748233e-01 2.68700000e-02 1.99798002e-02{\ldots}   
+        483  >MA1413.1       UIF1  [[4.23700000e-01 5.56050000e-01 8.60790000e-01{\ldots}   
+        484  >MA1414.1       E2FA  [[2.71536871e-01 2.44658856e-01 1.58511371e-02{\ldots}   
+        485  >MA1415.1       REF6  [[5.37835639e-01 7.14401953e-01 9.37889883e-01{\ldots}   
+        486  >MA1085.2     WRKY40  [[0.38034188 0.45726496 1.         0.         {\ldots}   
+        487  >MA1416.1    RAMOSA1  [[1.36283470e-01 7.51362835e-01 1.00034739e-01{\ldots}   
+        488  >MA1417.1         O2  [[1.50147203e-01 6.32973503e-02 1.42296369e-02{\ldots}   
+        
+                                                        Motifs  \textbackslash{}
+        0                       ['A', 'A', 'A', 'G', 'C', 'A']   
+        1                       ['A', 'A', 'A', 'G', 'Y', 'G']   
+        2    ['G', 'A', 'Y', 'A', 'A', 'C', 'C', 'G', 'M', {\ldots}   
+        3        ['S', 'T', 'Y', 'G', 'T', 'A', 'Y', 'T', 'Y']   
+        4    ['C', 'A', 'A', 'C', 'A', 'A', 'A', 'T', 'G', {\ldots}   
+        5                            ['A', 'A', 'A', 'G', 'C']   
+        6        ['T', 'A', 'A', 'C', 'C', 'G', 'T', 'T', 'W']   
+        7                            ['A', 'A', 'A', 'G', 'Y']   
+        8    ['M', 'C', 'A', 'W', 'A', 'W', 'A', 'T', 'R', {\ldots}   
+        9                  ['M', 'T', 'G', 'A', 'C', 'G', 'T']   
+        10   ['G', 'R', 'T', 'G', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        11   ['T', 'T', 'K', 'Y', 'C', 'C', 'Y', 'T', 'W', {\ldots}   
+        12            ['A', 'G', 'A', 'T', 'Y', 'Y', 'K', 'C']   
+        13   ['C', 'G', 'S', 'Y', 'G', 'C', 'C', 'C', 'C', {\ldots}   
+        14   ['A', 'C', 'T', 'T', 'C', 'T', 'T', 'A', 'T', {\ldots}   
+        15            ['W', 'S', 'A', 'C', 'G', 'T', 'G', 'G']   
+        16                 ['T', 'A', 'C', 'G', 'T', 'C', 'A']   
+        17   ['C', 'R', 'C', 'A', 'C', 'G', 'T', 'G', 'K', {\ldots}   
+        18   ['A', 'A', 'T', 'G', 'M', 'C', 'A', 'C', 'G', {\ldots}   
+        19   ['R', 'K', 'A', 'R', 'N', 'G', 'W', 'C', 'A', {\ldots}   
+        20            ['C', 'C', 'T', 'C', 'G', 'T', 'A', 'C']   
+        21   ['W', 'T', 'T', 'T', 'T', 'C', 'C', 'W', 'T', {\ldots}   
+        22   ['A', 'W', 'W', 'W', 'C', 'C', 'A', 'A', 'A', {\ldots}   
+        23   ['W', 'T', 'C', 'C', 'A', 'A', 'A', 'A', 'R', {\ldots}   
+        24   ['C', 'W', 'C', 'A', 'C', 'G', 'C', 'G', 'C', {\ldots}   
+        25   ['A', 'A', 'W', 'T', 'T', 'C', 'C', 'A', 'A', {\ldots}   
+        26   ['C', 'C', 'A', 'A', 'A', 'A', 'R', 'A', 'R', {\ldots}   
+        27   ['A', 'G', 'C', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        28            ['C', 'A', 'C', 'G', 'T', 'G', 'G', 'C']   
+        29            ['T', 'C', 'A', 'C', 'R', 'T', 'G', 'S']   
+        ..                                                 {\ldots}   
+        459  ['Y', 'A', 'G', 'A', 'T', 'C', 'T', 'A', 'G', {\ldots}   
+        460  ['W', 'W', 'T', 'G', 'G', 'A', 'T', 'A', 'A', {\ldots}   
+        461  ['W', 'W', 'W', 'A', 'Y', 'C', 'T', 'T', 'A', {\ldots}   
+        462  ['A', 'W', 'W', 'R', 'W', 'R', 'G', 'A', 'T', {\ldots}   
+        463  ['W', 'W', 'A', 'T', 'G', 'G', 'A', 'T', 'A', {\ldots}   
+        464  ['A', 'A', 'A', 'A', 'A', 'T', 'A', 'T', 'C', {\ldots}   
+        465  ['C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', {\ldots}   
+        466  ['A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', {\ldots}   
+        467  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}   
+        468  ['T', 'C', 'A', 'A', 'T', 'G', 'A', 'T', 'T', {\ldots}   
+        469  ['G', 'Y', 'G', 'R', 'Y', 'G', 'G', 'C', 'G', {\ldots}   
+        470  ['T', 'C', 'C', 'G', 'T', 'A', 'C', 'A', 'A', {\ldots}   
+        471  ['A', 'A', 'W', 'W', 'R', 'T', 'A', 'A', 'T', {\ldots}   
+        472  ['C', 'T', 'T', 'T', 'C', 'C', 'W', 'T', 'T', {\ldots}   
+        473  ['C', 'C', 'R', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        474  ['A', 'A', 'T', 'T', 'G', 'T', 'A', 'C', 'G', {\ldots}   
+        475  ['G', 'A', 'C', 'T', 'G', 'A', 'C', 'A', 'G', {\ldots}   
+        476  ['Y', 'A', 'A', 'T', 'S', 'A', 'T', 'T', 'G', {\ldots}   
+        477  ['A', 'A', 'T', 'G', 'A', 'C', 'G', 'T', 'A', {\ldots}   
+        478  ['A', 'G', 'T', 'T', 'A', 'G', 'G', 'T', 'A', {\ldots}   
+        479  ['A', 'A', 'G', 'A', 'T', 'A', 'C', 'G', 'S', {\ldots}   
+        480  ['G', 'G', 'G', 'G', 'S', 'C', 'C', 'M', 'C', {\ldots}   
+        481  ['A', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}   
+        482  ['T', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}   
+        483  ['A', 'A', 'A', 'G', 'A', 'T', 'T', 'C', 'C', {\ldots}   
+        484  ['T', 'G', 'G', 'C', 'G', 'C', 'C', 'A', 'A', {\ldots}   
+        485  ['R', 'A', 'A', 'A', 'C', 'A', 'G', 'A', 'G', {\ldots}   
+        486  ['A', 'A', 'A', 'G', 'T', 'C', 'A', 'A', 'A', {\ldots}   
+        487  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}   
+        488  ['G', 'T', 'G', 'C', 'C', 'A', 'C', 'G', 'T', {\ldots}   
+        
+                                             ReverseComplement  
+        0                       ['T', 'G', 'C', 'T', 'T', 'T']  
+        1                       ['C', 'R', 'C', 'T', 'T', 'T']  
+        2    ['G', 'K', 'C', 'G', 'G', 'T', 'T', 'R', 'T', {\ldots}  
+        3        ['R', 'A', 'R', 'T', 'A', 'C', 'R', 'A', 'S']  
+        4    ['R', 'T', 'K', 'T', 'T', 'K', 'C', 'C', 'A', {\ldots}  
+        5                            ['G', 'C', 'T', 'T', 'T']  
+        6        ['W', 'A', 'A', 'C', 'G', 'G', 'T', 'T', 'A']  
+        7                            ['R', 'C', 'T', 'T', 'T']  
+        8    ['A', 'T', 'T', 'W', 'C', 'Y', 'A', 'T', 'W', {\ldots}  
+        9                  ['A', 'C', 'G', 'T', 'C', 'A', 'K']  
+        10   ['G', 'K', 'K', 'C', 'A', 'C', 'G', 'T', 'C', {\ldots}  
+        11   ['C', 'G', 'A', 'W', 'A', 'R', 'G', 'G', 'R', {\ldots}  
+        12            ['G', 'K', 'R', 'R', 'A', 'T', 'C', 'T']  
+        13   ['G', 'G', 'G', 'G', 'G', 'C', 'R', 'S', 'C', {\ldots}  
+        14   ['K', 'A', 'T', 'A', 'A', 'G', 'A', 'A', 'G', {\ldots}  
+        15            ['C', 'C', 'A', 'C', 'G', 'T', 'S', 'W']  
+        16                 ['T', 'G', 'A', 'C', 'G', 'T', 'A']  
+        17   ['Y', 'S', 'K', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}  
+        18   ['A', 'A', 'T', 'G', 'K', 'C', 'A', 'C', 'G', {\ldots}  
+        19   ['C', 'C', 'A', 'C', 'G', 'T', 'G', 'W', 'C', {\ldots}  
+        20            ['G', 'T', 'A', 'C', 'G', 'A', 'G', 'G']  
+        21   ['C', 'C', 'A', 'A', 'A', 'A', 'A', 'W', 'G', {\ldots}  
+        22   ['W', 'T', 'Y', 'T', 'T', 'T', 'C', 'C', 'W', {\ldots}  
+        23   ['T', 'T', 'T', 'C', 'Y', 'W', 'Y', 'T', 'T', {\ldots}  
+        24   ['T', 'N', 'A', 'G', 'C', 'G', 'C', 'G', 'T', {\ldots}  
+        25   ['W', 'W', 'C', 'T', 'T', 'T', 'C', 'Y', 'A', {\ldots}  
+        26   ['Y', 'T', 'T', 'T', 'C', 'Y', 'T', 'Y', 'T', {\ldots}  
+        27   ['T', 'C', 'A', 'C', 'G', 'T', 'G', 'G', 'C', {\ldots}  
+        28            ['G', 'C', 'C', 'A', 'C', 'G', 'T', 'G']  
+        29            ['S', 'C', 'A', 'Y', 'G', 'T', 'G', 'A']  
+        ..                                                 {\ldots}  
+        459  ['A', 'G', 'A', 'T', 'C', 'T', 'A', 'G', 'A', {\ldots}  
+        460  ['Y', 'C', 'T', 'T', 'A', 'T', 'C', 'C', 'A', {\ldots}  
+        461  ['W', 'W', 'T', 'G', 'G', 'A', 'T', 'A', 'A', {\ldots}  
+        462  ['Y', 'C', 'T', 'T', 'A', 'T', 'C', 'Y', 'W', {\ldots}  
+        463  ['A', 'A', 'C', 'C', 'T', 'T', 'A', 'T', 'C', {\ldots}  
+        464  ['T', 'A', 'A', 'G', 'A', 'T', 'A', 'T', 'T', {\ldots}  
+        465  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}  
+        466  ['C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', {\ldots}  
+        467  ['T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', {\ldots}  
+        468  ['A', 'A', 'Y', 'C', 'A', 'A', 'T', 'C', 'A', {\ldots}  
+        469  ['C', 'K', 'C', 'C', 'G', 'C', 'C', 'G', 'C', {\ldots}  
+        470  ['A', 'A', 'T', 'T', 'G', 'T', 'A', 'C', 'G', {\ldots}  
+        471  ['R', 'T', 'K', 'A', 'T', 'C', 'A', 'T', 'T', {\ldots}  
+        472  ['A', 'C', 'T', 'T', 'W', 'C', 'C', 'A', 'A', {\ldots}  
+        473  ['A', 'A', 'A', 'A', 'A', 'N', 'A', 'N', 'T', {\ldots}  
+        474  ['G', 'T', 'C', 'C', 'G', 'T', 'A', 'C', 'A', {\ldots}  
+        475  ['A', 'C', 'T', 'G', 'T', 'C', 'A', 'G', 'T', {\ldots}  
+        476  ['S', 'C', 'A', 'A', 'T', 'S', 'A', 'T', 'T', {\ldots}  
+        477  ['D', 'T', 'A', 'C', 'G', 'T', 'C', 'A', 'T', {\ldots}  
+        478  ['N', 'T', 'A', 'C', 'C', 'T', 'A', 'A', 'C', {\ldots}  
+        479  ['A', 'S', 'C', 'G', 'T', 'A', 'T', 'C', 'T', {\ldots}  
+        480  ['G', 'G', 'K', 'G', 'G', 'S', 'C', 'C', 'C', {\ldots}  
+        481  ['Y', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}  
+        482  ['C', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}  
+        483  ['Y', 'G', 'G', 'A', 'A', 'T', 'C', 'T', 'T', {\ldots}  
+        484  ['T', 'T', 'T', 'G', 'G', 'C', 'G', 'C', 'C', {\ldots}  
+        485  ['T', 'N', 'C', 'T', 'C', 'T', 'G', 'T', 'T', {\ldots}  
+        486  ['T', 'T', 'T', 'T', 'G', 'A', 'C', 'T', 'T', {\ldots}  
+        487  ['T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', {\ldots}  
+        488  ['G', 'A', 'T', 'G', 'A', 'C', 'G', 'T', 'G', {\ldots}  
+        
+        [489 rows x 5 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}Importando data frame da fatores de transcrição}
+        \PY{n}{genoma} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genome Log.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{genoma}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}         Promoter         ID               Name  \textbackslash{}
+        0            NaN  >MA0020.1               Dof2   
+        1            NaN  >MA0021.1               Dof3   
+        2            NaN  >MA0034.1               Gam1   
+        3            NaN  >MA0044.1              HMG-1   
+        4            NaN  >MA0045.1            HMG-I/Y   
+        5            NaN  >MA0053.1              MNB1A   
+        6            NaN  >MA0054.1            myb.Ph3   
+        7            NaN  >MA0064.1                PBF   
+        8            NaN  >MA0082.1           squamosa   
+        9            NaN  >MA0096.1            bZIP910   
+        10           NaN  >MA0097.1            bZIP911   
+        11           NaN  >MA0120.1                id1   
+        12           NaN  >MA0121.1              ARR10   
+        13           NaN  >MA0123.1               abi4   
+        14           NaN  >MA0127.1               PEND   
+        15           NaN  >MA0128.1             EmBP-1   
+        16           NaN  >MA0129.1              TGA1A   
+        17           NaN  >MA0549.1               BZR2   
+        18           NaN  >MA0551.1                HY5   
+        19           NaN  >MA0552.1               PIF1   
+        20           NaN  >MA0553.1                SMZ   
+        21           NaN  >MA0554.1               SOC1   
+        22           NaN  >MA0555.1                SVP   
+        23           NaN  >MA0556.1                AP3   
+        24           NaN  >MA0557.1               FHY3   
+        25           NaN  >MA0558.1                FLC   
+        26           NaN  >MA0559.1                 PI   
+        27           NaN  >MA0560.1               PIF3   
+        28           NaN  >MA0561.1               PIF4   
+        29           NaN  >MA0562.1               PIF5   
+        {\ldots}          {\ldots}        {\ldots}                {\ldots}   
+        757963       NaN  >MA0989.1  PHYPADRAFT\_153324   
+        757964       NaN  >MA1027.1               KAN1   
+        757965       NaN  >MA1042.1              MYB59   
+        757966       NaN  >MA1071.1             DOF5.3   
+        757967       NaN  >MA1201.1              AGL42   
+        757968       NaN  >MA1206.1               ARF2   
+        757969       NaN  >MA1210.1              HAT22   
+        757970       NaN  >MA0021.1               Dof3   
+        757971       NaN  >MA0053.1              MNB1A   
+        757972       NaN  >MA0064.1                PBF   
+        757973       NaN  >MA0121.1              ARR10   
+        757974       NaN  >MA0562.1               PIF5   
+        757975       NaN  >MA0932.1              AHL12   
+        757976       NaN  >MA0933.1              AHL20   
+        757977       NaN  >MA0934.1              AHL25   
+        757978       NaN  >MA0951.1            ATHB-16   
+        757979       NaN  >MA0981.1             DOF1.8   
+        757980       NaN  >MA0982.1             DOF2.4   
+        757981       NaN  >MA0983.1             DOF5.6   
+        757982       NaN  >MA0987.1  PHYPADRAFT\_140773   
+        757983       NaN  >MA0989.1  PHYPADRAFT\_153324   
+        757984       NaN  >MA1027.1               KAN1   
+        757985       NaN  >MA1030.1        P0510F09.23   
+        757986       NaN  >MA1031.1       OJ1581\_H09.2   
+        757987       NaN  >MA1071.1             DOF5.3   
+        757988       NaN  >MA1073.1               TRB2   
+        757989       NaN  >MA1093.1             WRKY75   
+        757990       NaN  >MA1202.1              AGL55   
+        757991       NaN  >MA1275.1          AT1G47655   
+        757992       NaN  >MA1324.1             GATA20   
+        
+                                                           Motifs  \textbackslash{}
+        0                          ['A', 'A', 'A', 'G', 'C', 'A']   
+        1                          ['A', 'A', 'A', 'G', 'Y', 'G']   
+        2       ['G', 'A', 'Y', 'A', 'A', 'C', 'C', 'G', 'M', {\ldots}   
+        3           ['S', 'T', 'Y', 'G', 'T', 'A', 'Y', 'T', 'Y']   
+        4       ['C', 'A', 'A', 'C', 'A', 'A', 'A', 'T', 'G', {\ldots}   
+        5                               ['A', 'A', 'A', 'G', 'C']   
+        6           ['T', 'A', 'A', 'C', 'C', 'G', 'T', 'T', 'W']   
+        7                               ['A', 'A', 'A', 'G', 'Y']   
+        8       ['M', 'C', 'A', 'W', 'A', 'W', 'A', 'T', 'R', {\ldots}   
+        9                     ['M', 'T', 'G', 'A', 'C', 'G', 'T']   
+        10      ['G', 'R', 'T', 'G', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        11      ['T', 'T', 'K', 'Y', 'C', 'C', 'Y', 'T', 'W', {\ldots}   
+        12               ['A', 'G', 'A', 'T', 'Y', 'Y', 'K', 'C']   
+        13      ['C', 'G', 'S', 'Y', 'G', 'C', 'C', 'C', 'C', {\ldots}   
+        14      ['A', 'C', 'T', 'T', 'C', 'T', 'T', 'A', 'T', {\ldots}   
+        15               ['W', 'S', 'A', 'C', 'G', 'T', 'G', 'G']   
+        16                    ['T', 'A', 'C', 'G', 'T', 'C', 'A']   
+        17      ['C', 'R', 'C', 'A', 'C', 'G', 'T', 'G', 'K', {\ldots}   
+        18      ['A', 'A', 'T', 'G', 'M', 'C', 'A', 'C', 'G', {\ldots}   
+        19      ['R', 'K', 'A', 'R', 'N', 'G', 'W', 'C', 'A', {\ldots}   
+        20               ['C', 'C', 'T', 'C', 'G', 'T', 'A', 'C']   
+        21      ['W', 'T', 'T', 'T', 'T', 'C', 'C', 'W', 'T', {\ldots}   
+        22      ['A', 'W', 'W', 'W', 'C', 'C', 'A', 'A', 'A', {\ldots}   
+        23      ['W', 'T', 'C', 'C', 'A', 'A', 'A', 'A', 'R', {\ldots}   
+        24      ['C', 'W', 'C', 'A', 'C', 'G', 'C', 'G', 'C', {\ldots}   
+        25      ['A', 'A', 'W', 'T', 'T', 'C', 'C', 'A', 'A', {\ldots}   
+        26      ['C', 'C', 'A', 'A', 'A', 'A', 'R', 'A', 'R', {\ldots}   
+        27      ['A', 'G', 'C', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        28               ['C', 'A', 'C', 'G', 'T', 'G', 'G', 'C']   
+        29               ['T', 'C', 'A', 'C', 'R', 'T', 'G', 'S']   
+        {\ldots}                                                   {\ldots}   
+        757963      ['N', 'A', 'W', 'A', 'A', 'A', 'G', 'T', 'N']   
+        757964           ['A', 'N', 'W', 'T', 'A', 'T', 'T', 'C']   
+        757965           ['R', 'T', 'T', 'A', 'G', 'G', 'T', 'A']   
+        757966                ['N', 'A', 'W', 'A', 'A', 'M', 'G']   
+        757967                ['C', 'A', 'T', 'C', 'A', 'T', 'C']   
+        757968  ['W', 'K', 'S', 'M', 'G', 'A', 'C', 'A', 'A', {\ldots}   
+        757969  ['A', 'Y', 'Y', 'A', 'A', 'T', 'C', 'A', 'T', {\ldots}   
+        757970                     ['A', 'A', 'A', 'G', 'Y', 'G']   
+        757971                          ['A', 'A', 'A', 'G', 'C']   
+        757972                          ['A', 'A', 'A', 'G', 'Y']   
+        757973           ['A', 'G', 'A', 'T', 'Y', 'Y', 'K', 'C']   
+        757974           ['T', 'C', 'A', 'C', 'R', 'T', 'G', 'S']   
+        757975           ['A', 'A', 'W', 'W', 'W', 'W', 'T', 'T']   
+        757976           ['A', 'A', 'T', 'T', 'A', 'A', 'W', 'T']   
+        757977           ['A', 'W', 'T', 'T', 'A', 'A', 'W', 'T']   
+        757978           ['T', 'A', 'A', 'T', 'M', 'A', 'T', 'T']   
+        757979  ['N', 'A', 'W', 'A', 'A', 'A', 'G', 'T', 'N', {\ldots}   
+        757980                ['A', 'W', 'A', 'A', 'A', 'G', 'T']   
+        757981           ['N', 'A', 'W', 'A', 'A', 'M', 'G', 'T']   
+        757982  ['N', 'A', 'W', 'A', 'A', 'A', 'G', 'T', 'N', {\ldots}   
+        757983      ['N', 'A', 'W', 'A', 'A', 'A', 'G', 'T', 'N']   
+        757984           ['A', 'N', 'W', 'T', 'A', 'T', 'T', 'C']   
+        757985  ['W', 'R', 'M', 'C', 'C', 'T', 'A', 'R', 'N', {\ldots}   
+        757986  ['G', 'K', 'G', 'G', 'G', 'C', 'C', 'C', 'M', {\ldots}   
+        757987                ['N', 'A', 'W', 'A', 'A', 'M', 'G']   
+        757988           ['W', 'R', 'M', 'C', 'C', 'T', 'A', 'R']   
+        757989           ['A', 'R', 'G', 'T', 'C', 'A', 'A', 'C']   
+        757990                     ['T', 'C', 'A', 'C', 'C', 'A']   
+        757991  ['N', 'G', 'A', 'W', 'A', 'A', 'A', 'G', 'T', {\ldots}   
+        757992           ['A', 'T', 'C', 'S', 'G', 'A', 'T', 'C']   
+        
+                                                ReverseComplement  \textbackslash{}
+        0                          ['T', 'G', 'C', 'T', 'T', 'T']   
+        1                          ['C', 'R', 'C', 'T', 'T', 'T']   
+        2       ['G', 'K', 'C', 'G', 'G', 'T', 'T', 'R', 'T', {\ldots}   
+        3           ['R', 'A', 'R', 'T', 'A', 'C', 'R', 'A', 'S']   
+        4       ['R', 'T', 'K', 'T', 'T', 'K', 'C', 'C', 'A', {\ldots}   
+        5                               ['G', 'C', 'T', 'T', 'T']   
+        6           ['W', 'A', 'A', 'C', 'G', 'G', 'T', 'T', 'A']   
+        7                               ['R', 'C', 'T', 'T', 'T']   
+        8       ['A', 'T', 'T', 'W', 'C', 'Y', 'A', 'T', 'W', {\ldots}   
+        9                     ['A', 'C', 'G', 'T', 'C', 'A', 'K']   
+        10      ['G', 'K', 'K', 'C', 'A', 'C', 'G', 'T', 'C', {\ldots}   
+        11      ['C', 'G', 'A', 'W', 'A', 'R', 'G', 'G', 'R', {\ldots}   
+        12               ['G', 'K', 'R', 'R', 'A', 'T', 'C', 'T']   
+        13      ['G', 'G', 'G', 'G', 'G', 'C', 'R', 'S', 'C', {\ldots}   
+        14      ['K', 'A', 'T', 'A', 'A', 'G', 'A', 'A', 'G', {\ldots}   
+        15               ['C', 'C', 'A', 'C', 'G', 'T', 'S', 'W']   
+        16                    ['T', 'G', 'A', 'C', 'G', 'T', 'A']   
+        17      ['Y', 'S', 'K', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        18      ['A', 'A', 'T', 'G', 'K', 'C', 'A', 'C', 'G', {\ldots}   
+        19      ['C', 'C', 'A', 'C', 'G', 'T', 'G', 'W', 'C', {\ldots}   
+        20               ['G', 'T', 'A', 'C', 'G', 'A', 'G', 'G']   
+        21      ['C', 'C', 'A', 'A', 'A', 'A', 'A', 'W', 'G', {\ldots}   
+        22      ['W', 'T', 'Y', 'T', 'T', 'T', 'C', 'C', 'W', {\ldots}   
+        23      ['T', 'T', 'T', 'C', 'Y', 'W', 'Y', 'T', 'T', {\ldots}   
+        24      ['T', 'N', 'A', 'G', 'C', 'G', 'C', 'G', 'T', {\ldots}   
+        25      ['W', 'W', 'C', 'T', 'T', 'T', 'C', 'Y', 'A', {\ldots}   
+        26      ['Y', 'T', 'T', 'T', 'C', 'Y', 'T', 'Y', 'T', {\ldots}   
+        27      ['T', 'C', 'A', 'C', 'G', 'T', 'G', 'G', 'C', {\ldots}   
+        28               ['G', 'C', 'C', 'A', 'C', 'G', 'T', 'G']   
+        29               ['S', 'C', 'A', 'Y', 'G', 'T', 'G', 'A']   
+        {\ldots}                                                   {\ldots}   
+        757963      ['N', 'A', 'C', 'T', 'T', 'T', 'W', 'T', 'N']   
+        757964           ['G', 'A', 'A', 'T', 'A', 'W', 'N', 'T']   
+        757965           ['T', 'A', 'C', 'C', 'T', 'A', 'A', 'Y']   
+        757966                ['C', 'K', 'T', 'T', 'W', 'T', 'N']   
+        757967                ['G', 'A', 'T', 'G', 'A', 'T', 'G']   
+        757968  ['Y', 'T', 'T', 'G', 'T', 'C', 'K', 'S', 'K', {\ldots}   
+        757969  ['A', 'A', 'T', 'G', 'A', 'T', 'T', 'R', 'R', {\ldots}   
+        757970                     ['C', 'R', 'C', 'T', 'T', 'T']   
+        757971                          ['G', 'C', 'T', 'T', 'T']   
+        757972                          ['R', 'C', 'T', 'T', 'T']   
+        757973           ['G', 'K', 'R', 'R', 'A', 'T', 'C', 'T']   
+        757974           ['S', 'C', 'A', 'Y', 'G', 'T', 'G', 'A']   
+        757975           ['A', 'A', 'W', 'W', 'W', 'W', 'T', 'T']   
+        757976           ['A', 'W', 'T', 'T', 'A', 'A', 'T', 'T']   
+        757977           ['A', 'W', 'T', 'T', 'A', 'A', 'W', 'T']   
+        757978           ['A', 'A', 'T', 'K', 'A', 'T', 'T', 'A']   
+        757979  ['N', 'N', 'A', 'C', 'T', 'T', 'T', 'W', 'T', {\ldots}   
+        757980                ['A', 'C', 'T', 'T', 'T', 'W', 'T']   
+        757981           ['A', 'C', 'K', 'T', 'T', 'W', 'T', 'N']   
+        757982  ['N', 'N', 'A', 'C', 'T', 'T', 'T', 'W', 'T', {\ldots}   
+        757983      ['N', 'A', 'C', 'T', 'T', 'T', 'W', 'T', 'N']   
+        757984           ['G', 'A', 'A', 'T', 'A', 'W', 'N', 'T']   
+        757985  ['N', 'N', 'Y', 'T', 'A', 'G', 'G', 'K', 'Y', {\ldots}   
+        757986  ['G', 'K', 'G', 'G', 'G', 'C', 'C', 'C', 'K', {\ldots}   
+        757987                ['C', 'K', 'T', 'T', 'W', 'T', 'N']   
+        757988           ['Y', 'T', 'A', 'G', 'G', 'K', 'Y', 'W']   
+        757989           ['G', 'T', 'T', 'G', 'A', 'C', 'Y', 'T']   
+        757990                     ['T', 'G', 'G', 'T', 'G', 'A']   
+        757991  ['T', 'Y', 'A', 'C', 'T', 'T', 'T', 'W', 'T', {\ldots}   
+        757992           ['G', 'A', 'T', 'C', 'S', 'G', 'A', 'T']   
+        
+                                                             5l3l  \textbackslash{}
+        0                                                       0   
+        1                                                       0   
+        2                                                       0   
+        3                                                       0   
+        4                                                       0   
+        5                                                       0   
+        6                                                       0   
+        7                                                       0   
+        8                                                       0   
+        9                                                       0   
+        10                                                      0   
+        11                                                      0   
+        12                                                      0   
+        13                                                      0   
+        14                                                      0   
+        15                                                      0   
+        16                                                      0   
+        17                                                      0   
+        18                                                      0   
+        19                                                      0   
+        20                                                      0   
+        21                                                      0   
+        22                                                      0   
+        23                                                      0   
+        24                                                      0   
+        25                                                      0   
+        26                                                      0   
+        27                                                      0   
+        28                                                      0   
+        29                                                      0   
+        {\ldots}                                                   {\ldots}   
+        757963                                              [289]   
+        757964                                              [350]   
+        757965                                                 []   
+        757966                        [214, 245, 289, 1241, 1752]   
+        757967                                                 []   
+        757968                                                 []   
+        757969                                              [656]   
+        757970                                        [435, 1972]   
+        757971                                             [1972]   
+        757972       [160, 435, 713, 859, 1289, 1393, 1597, 1972]   
+        757973                                       [1328, 1499]   
+        757974                                             [1334]   
+        757975  [83, 126, 127, 178, 179, 180, 204, 246, 650, 6{\ldots}   
+        757976                                       [1514, 1518]   
+        757977                       [338, 613, 1510, 1514, 1518]   
+        757978                                                 []   
+        757979                              [157, 710, 856, 1390]   
+        757980                              [158, 711, 857, 1391]   
+        757981                        [157, 710, 856, 1390, 1737]   
+        757982                              [157, 710, 856, 1390]   
+        757983                              [157, 710, 856, 1390]   
+        757984                                                 []   
+        757985                                       [1207, 1847]   
+        757986                                                 []   
+        757987  [157, 303, 673, 710, 856, 885, 1015, 1055, 115{\ldots}   
+        757988                                       [1207, 1847]   
+        757989                                                 []   
+        757990                                             [1364]   
+        757991                                              [855]   
+        757992                                              [478]   
+        
+                                                             3l5l  
+        0                                                       0  
+        1                                                       0  
+        2                                                       0  
+        3                                                       0  
+        4                                                       0  
+        5                                                       0  
+        6                                                       0  
+        7                                                       0  
+        8                                                       0  
+        9                                                       0  
+        10                                                      0  
+        11                                                      0  
+        12                                                      0  
+        13                                                      0  
+        14                                                      0  
+        15                                                      0  
+        16                                                      0  
+        17                                                      0  
+        18                                                      0  
+        19                                                      0  
+        20                                                      0  
+        21                                                      0  
+        22                                                      0  
+        23                                                      0  
+        24                                                      0  
+        25                                                      0  
+        26                                                      0  
+        27                                                      0  
+        28                                                      0  
+        29                                                      0  
+        {\ldots}                                                   {\ldots}  
+        757963                                                 []  
+        757964                                       [1609, 1785]  
+        757965                                             [1581]  
+        757966                                                 []  
+        757967                                 [1337, 1340, 1713]  
+        757968                                              [581]  
+        757969                                                 []  
+        757970                                              [413]  
+        757971                                        [153, 1785]  
+        757972       [153, 349, 414, 780, 1308, 1624, 1785, 1870]  
+        757973                                                 []  
+        757974                                                 []  
+        757975  [83, 126, 127, 178, 179, 180, 204, 246, 650, 6{\ldots}  
+        757976                                  [613, 1510, 1514]  
+        757977                       [338, 613, 1510, 1514, 1518]  
+        757978                                              [165]  
+        757979                                                 []  
+        757980                                                 []  
+        757981                                                 []  
+        757982                                                 []  
+        757983                                                 []  
+        757984                                             [1407]  
+        757985                                                 []  
+        757986                                             [1929]  
+        757987                                                 []  
+        757988                                                 []  
+        757989                                             [1681]  
+        757990                                                 []  
+        757991                                                 []  
+        757992                                                 []  
+        
+        [757993 rows x 7 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genome}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{i} \PY{o}{=} \PY{n}{genoma}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genome}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{i}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5l3l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}             ID       Name                                             Matrix  \textbackslash{}
+        0    >MA0020.1       Dof2  [[1.         1.         1.         0.         {\ldots}   
+        1    >MA0021.1       Dof3  [[1.         1.         1.         0.         {\ldots}   
+        2    >MA0034.1       Gam1  [[0.16 0.4  0.12 0.92 1.   0.04 0.12 0.24 0.4 {\ldots}   
+        3    >MA0044.1      HMG-1  [[0.         0.         0.         0.         {\ldots}   
+        4    >MA0045.1    HMG-I/Y  [[0.21428571 0.5        0.64285714 0.21428571 {\ldots}   
+        5    >MA0053.1      MNB1A  [[1.  1.  1.  0.  0.2]\textbackslash{}n [0.  0.  0.  0.  0.6]{\ldots}   
+        6    >MA0054.1    myb.Ph3  [[0.27142857 0.91428571 0.9        0.05714286 {\ldots}   
+        7    >MA0064.1        PBF  [[1.     1.     1.     0.     0.0625]\textbackslash{}n [0.   {\ldots}   
+        8    >MA0082.1   squamosa  [[0.36666667 0.         0.8        0.53333333 {\ldots}   
+        9    >MA0096.1    bZIP910  [[0.42857143 0.         0.         1.         {\ldots}   
+        10   >MA0097.1    bZIP911  [[0.03030303 0.51515152 0.         0.         {\ldots}   
+        11   >MA0120.1        id1  [[0.04166667 0.125      0.04166667 0.         {\ldots}   
+        12   >MA0121.1      ARR10  [[0.93333333 0.         0.93333333 0.         {\ldots}   
+        13   >MA0123.1       abi4  [[0.         0.24489796 0.         0.         {\ldots}   
+        14   >MA0127.1       PEND  [[0.71428571 0.14285714 0.02380952 0.0952381  {\ldots}   
+        15   >MA0128.1     EmBP-1  [[0.69230769 0.07692308 1.         0.         {\ldots}   
+        16   >MA0129.1      TGA1A  [[0.26666667 0.86666667 0.         0.13333333 {\ldots}   
+        17   >MA0549.1       BZR2  [[0.23232323 0.41414141 0.         0.8989899  {\ldots}   
+        18   >MA0551.1        HY5  [[0.321875 0.3375   0.1625   0.028125 0.46875 {\ldots}   
+        19   >MA0552.1       PIF1  [[0.3245614  0.21929825 0.30701754 0.46491228 {\ldots}   
+        20   >MA0553.1        SMZ  [[0.         0.         0.         0.         {\ldots}   
+        21   >MA0554.1       SOC1  [[0.32432432 0.19369369 0.0731982  0.06981982 {\ldots}   
+        22   >MA0555.1        SVP  [[0.30434783 0.30434783 0.30434783 0.35869565 {\ldots}   
+        23   >MA0556.1        AP3  [[0.3161512  0.28865979 0.16494845 0.         {\ldots}   
+        24   >MA0557.1       FHY3  [[0.19574468 0.31914894 0.03829787 0.96170213 {\ldots}   
+        25   >MA0558.1        FLC  [[0.44       0.32727273 0.34545455 0.29818182 {\ldots}   
+        26   >MA0559.1         PI  [[0.27956989 0.10215054 0.63978495 0.80286738 {\ldots}   
+        27   >MA0560.1       PIF3  [[0.39848197 0.11005693 0.03605313 0.         {\ldots}   
+        28   >MA0561.1       PIF4  [[0.         1.         0.         0.14626866 {\ldots}   
+        29   >MA0562.1       PIF5  [[0.         0.         1.         0.         {\ldots}   
+        ..         {\ldots}        {\ldots}                                                {\ldots}   
+        459  >MA1396.1      GATA6  [[0.10791367 0.93764988 0.         1.         {\ldots}   
+        460  >MA1397.1  At1g74840  [[0.5        0.425      0.07666667 0.065      {\ldots}   
+        461  >MA1398.1  At5g47390  [[0.37562604 0.31719533 0.4624374  0.48414023 {\ldots}   
+        462  >MA1399.1  At5g08520  [[0.32441472 0.48829431 0.41471572 0.34949833 {\ldots}   
+        463  >MA1400.1  At1g19000  [[0.45409015 0.53255426 0.47078464 0.05509182 {\ldots}   
+        464  >MA1401.1       EPR1  [[0.42211055 0.70519263 0.99497487 1.         {\ldots}   
+        465  >MA1402.1       BPC6  [[0.12765957 0.09574468 0.06914894 0.07978723 {\ldots}   
+        466  >MA1403.1       BPC5  [[0.93137255 0.02941176 1.         0.01960784 {\ldots}   
+        467  >MA1404.1       BPC1  [[0.15213358 0.8961039  0.0148423  0.92949907 {\ldots}   
+        468  >MA0954.2      ATHB7  [[0.15333333 0.08833333 0.78833333 0.93333333 {\ldots}   
+        469  >MA1000.2     ERF105  [[0.24573379 0.25426621 0.28668942 0.3225256  {\ldots}   
+        470  >MA0586.2      SPL14  [[0.21440823 0.03945111 0.         0.         {\ldots}   
+        471  >MA1026.2     ATHB15  [[0.44915254 0.61525424 0.45423729 0.35932203 {\ldots}   
+        472  >MA0548.2      AGL15  [[0.22203673 0.08013356 0.02671119 0.14023372 {\ldots}   
+        473  >MA0550.2       BZR1  [[0.16156463 0.00680272 0.59693878 0.         {\ldots}   
+        474  >MA1059.2       SPL5  [[0.40802676 0.45652174 0.17056856 0.04180602 {\ldots}   
+        475  >MA1405.1      SIZF2  [[0.16191162 0.8838     0.00263997 0.03329    {\ldots}   
+        476  >MA1406.1      ATHB4  [[2.39200000e-02 8.22550000e-01 9.83480000e-01{\ldots}   
+        477  >MA1407.1     bZIP14  [[0.40640641 0.43756244 0.01698302 0.01698302 {\ldots}   
+        478  >MA1408.1    FaEOBII  [[0.45035    0.21068    0.01124011 0.02313    {\ldots}   
+        479  >MA1409.1     OsRR22  [[0.51257    0.8687     0.00486    0.97906979 {\ldots}   
+        480  >MA1410.1     StBRC1  [[0.11497885 0.02437    0.00419    0.04402    {\ldots}   
+        481  >MA1411.1      TSAR1  [[3.12613126e-01 3.30000000e-02 1.25451255e-01{\ldots}   
+        482  >MA1412.1      TSAR2  [[1.76748233e-01 2.68700000e-02 1.99798002e-02{\ldots}   
+        483  >MA1413.1       UIF1  [[4.23700000e-01 5.56050000e-01 8.60790000e-01{\ldots}   
+        484  >MA1414.1       E2FA  [[2.71536871e-01 2.44658856e-01 1.58511371e-02{\ldots}   
+        485  >MA1415.1       REF6  [[5.37835639e-01 7.14401953e-01 9.37889883e-01{\ldots}   
+        486  >MA1085.2     WRKY40  [[0.38034188 0.45726496 1.         0.         {\ldots}   
+        487  >MA1416.1    RAMOSA1  [[1.36283470e-01 7.51362835e-01 1.00034739e-01{\ldots}   
+        488  >MA1417.1         O2  [[1.50147203e-01 6.32973503e-02 1.42296369e-02{\ldots}   
+        
+                                                        Motifs  \textbackslash{}
+        0                       ['A', 'A', 'A', 'G', 'C', 'A']   
+        1                       ['A', 'A', 'A', 'G', 'Y', 'G']   
+        2    ['G', 'A', 'Y', 'A', 'A', 'C', 'C', 'G', 'M', {\ldots}   
+        3        ['S', 'T', 'Y', 'G', 'T', 'A', 'Y', 'T', 'Y']   
+        4    ['C', 'A', 'A', 'C', 'A', 'A', 'A', 'T', 'G', {\ldots}   
+        5                            ['A', 'A', 'A', 'G', 'C']   
+        6        ['T', 'A', 'A', 'C', 'C', 'G', 'T', 'T', 'W']   
+        7                            ['A', 'A', 'A', 'G', 'Y']   
+        8    ['M', 'C', 'A', 'W', 'A', 'W', 'A', 'T', 'R', {\ldots}   
+        9                  ['M', 'T', 'G', 'A', 'C', 'G', 'T']   
+        10   ['G', 'R', 'T', 'G', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        11   ['T', 'T', 'K', 'Y', 'C', 'C', 'Y', 'T', 'W', {\ldots}   
+        12            ['A', 'G', 'A', 'T', 'Y', 'Y', 'K', 'C']   
+        13   ['C', 'G', 'S', 'Y', 'G', 'C', 'C', 'C', 'C', {\ldots}   
+        14   ['A', 'C', 'T', 'T', 'C', 'T', 'T', 'A', 'T', {\ldots}   
+        15            ['W', 'S', 'A', 'C', 'G', 'T', 'G', 'G']   
+        16                 ['T', 'A', 'C', 'G', 'T', 'C', 'A']   
+        17   ['C', 'R', 'C', 'A', 'C', 'G', 'T', 'G', 'K', {\ldots}   
+        18   ['A', 'A', 'T', 'G', 'M', 'C', 'A', 'C', 'G', {\ldots}   
+        19   ['R', 'K', 'A', 'R', 'N', 'G', 'W', 'C', 'A', {\ldots}   
+        20            ['C', 'C', 'T', 'C', 'G', 'T', 'A', 'C']   
+        21   ['W', 'T', 'T', 'T', 'T', 'C', 'C', 'W', 'T', {\ldots}   
+        22   ['A', 'W', 'W', 'W', 'C', 'C', 'A', 'A', 'A', {\ldots}   
+        23   ['W', 'T', 'C', 'C', 'A', 'A', 'A', 'A', 'R', {\ldots}   
+        24   ['C', 'W', 'C', 'A', 'C', 'G', 'C', 'G', 'C', {\ldots}   
+        25   ['A', 'A', 'W', 'T', 'T', 'C', 'C', 'A', 'A', {\ldots}   
+        26   ['C', 'C', 'A', 'A', 'A', 'A', 'R', 'A', 'R', {\ldots}   
+        27   ['A', 'G', 'C', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        28            ['C', 'A', 'C', 'G', 'T', 'G', 'G', 'C']   
+        29            ['T', 'C', 'A', 'C', 'R', 'T', 'G', 'S']   
+        ..                                                 {\ldots}   
+        459  ['Y', 'A', 'G', 'A', 'T', 'C', 'T', 'A', 'G', {\ldots}   
+        460  ['W', 'W', 'T', 'G', 'G', 'A', 'T', 'A', 'A', {\ldots}   
+        461  ['W', 'W', 'W', 'A', 'Y', 'C', 'T', 'T', 'A', {\ldots}   
+        462  ['A', 'W', 'W', 'R', 'W', 'R', 'G', 'A', 'T', {\ldots}   
+        463  ['W', 'W', 'A', 'T', 'G', 'G', 'A', 'T', 'A', {\ldots}   
+        464  ['A', 'A', 'A', 'A', 'A', 'T', 'A', 'T', 'C', {\ldots}   
+        465  ['C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', {\ldots}   
+        466  ['A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', {\ldots}   
+        467  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}   
+        468  ['T', 'C', 'A', 'A', 'T', 'G', 'A', 'T', 'T', {\ldots}   
+        469  ['G', 'Y', 'G', 'R', 'Y', 'G', 'G', 'C', 'G', {\ldots}   
+        470  ['T', 'C', 'C', 'G', 'T', 'A', 'C', 'A', 'A', {\ldots}   
+        471  ['A', 'A', 'W', 'W', 'R', 'T', 'A', 'A', 'T', {\ldots}   
+        472  ['C', 'T', 'T', 'T', 'C', 'C', 'W', 'T', 'T', {\ldots}   
+        473  ['C', 'C', 'R', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        474  ['A', 'A', 'T', 'T', 'G', 'T', 'A', 'C', 'G', {\ldots}   
+        475  ['G', 'A', 'C', 'T', 'G', 'A', 'C', 'A', 'G', {\ldots}   
+        476  ['Y', 'A', 'A', 'T', 'S', 'A', 'T', 'T', 'G', {\ldots}   
+        477  ['A', 'A', 'T', 'G', 'A', 'C', 'G', 'T', 'A', {\ldots}   
+        478  ['A', 'G', 'T', 'T', 'A', 'G', 'G', 'T', 'A', {\ldots}   
+        479  ['A', 'A', 'G', 'A', 'T', 'A', 'C', 'G', 'S', {\ldots}   
+        480  ['G', 'G', 'G', 'G', 'S', 'C', 'C', 'M', 'C', {\ldots}   
+        481  ['A', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}   
+        482  ['T', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}   
+        483  ['A', 'A', 'A', 'G', 'A', 'T', 'T', 'C', 'C', {\ldots}   
+        484  ['T', 'G', 'G', 'C', 'G', 'C', 'C', 'A', 'A', {\ldots}   
+        485  ['R', 'A', 'A', 'A', 'C', 'A', 'G', 'A', 'G', {\ldots}   
+        486  ['A', 'A', 'A', 'G', 'T', 'C', 'A', 'A', 'A', {\ldots}   
+        487  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}   
+        488  ['G', 'T', 'G', 'C', 'C', 'A', 'C', 'G', 'T', {\ldots}   
+        
+                                             ReverseComplement  Genome  
+        0                       ['T', 'G', 'C', 'T', 'T', 'T']       5  
+        1                       ['C', 'R', 'C', 'T', 'T', 'T']       1  
+        2    ['G', 'K', 'C', 'G', 'G', 'T', 'T', 'R', 'T', {\ldots}      91  
+        3        ['R', 'A', 'R', 'T', 'A', 'C', 'R', 'A', 'S']   21726  
+        4    ['R', 'T', 'K', 'T', 'T', 'K', 'C', 'C', 'A', {\ldots}   25575  
+        5                            ['G', 'C', 'T', 'T', 'T']      79  
+        6        ['W', 'A', 'A', 'C', 'G', 'G', 'T', 'T', 'A']    7181  
+        7                            ['R', 'C', 'T', 'T', 'T']       2  
+        8    ['A', 'T', 'T', 'W', 'C', 'Y', 'A', 'T', 'W', {\ldots}   27431  
+        9                  ['A', 'C', 'G', 'T', 'C', 'A', 'K']     957  
+        10   ['G', 'K', 'K', 'C', 'A', 'C', 'G', 'T', 'C', {\ldots}   29717  
+        11   ['C', 'G', 'A', 'W', 'A', 'R', 'G', 'G', 'R', {\ldots}     178  
+        12            ['G', 'K', 'R', 'R', 'A', 'T', 'C', 'T']    4041  
+        13   ['G', 'G', 'G', 'G', 'G', 'C', 'R', 'S', 'C', {\ldots}      20  
+        14   ['K', 'A', 'T', 'A', 'A', 'G', 'A', 'A', 'G', {\ldots}      13  
+        15            ['C', 'C', 'A', 'C', 'G', 'T', 'S', 'W']     103  
+        16                 ['T', 'G', 'A', 'C', 'G', 'T', 'A']    8031  
+        17   ['Y', 'S', 'K', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}      22  
+        18   ['A', 'A', 'T', 'G', 'K', 'C', 'A', 'C', 'G', {\ldots}     551  
+        19   ['C', 'C', 'A', 'C', 'G', 'T', 'G', 'W', 'C', {\ldots}    3780  
+        20            ['G', 'T', 'A', 'C', 'G', 'A', 'G', 'G']    2411  
+        21   ['C', 'C', 'A', 'A', 'A', 'A', 'A', 'W', 'G', {\ldots}       1  
+        22   ['W', 'T', 'Y', 'T', 'T', 'T', 'C', 'C', 'W', {\ldots}     170  
+        23   ['T', 'T', 'T', 'C', 'Y', 'W', 'Y', 'T', 'T', {\ldots}       1  
+        24   ['T', 'N', 'A', 'G', 'C', 'G', 'C', 'G', 'T', {\ldots}       9  
+        25   ['W', 'W', 'C', 'T', 'T', 'T', 'C', 'Y', 'A', {\ldots}     165  
+        26   ['Y', 'T', 'T', 'T', 'C', 'Y', 'T', 'Y', 'T', {\ldots}     375  
+        27   ['T', 'C', 'A', 'C', 'G', 'T', 'G', 'G', 'C', {\ldots}       8  
+        28            ['G', 'C', 'C', 'A', 'C', 'G', 'T', 'G']       2  
+        29            ['S', 'C', 'A', 'Y', 'G', 'T', 'G', 'A']      42  
+        ..                                                 {\ldots}     {\ldots}  
+        459  ['A', 'G', 'A', 'T', 'C', 'T', 'A', 'G', 'A', {\ldots}    7144  
+        460  ['Y', 'C', 'T', 'T', 'A', 'T', 'C', 'C', 'A', {\ldots}       6  
+        461  ['W', 'W', 'T', 'G', 'G', 'A', 'T', 'A', 'A', {\ldots}       5  
+        462  ['Y', 'C', 'T', 'T', 'A', 'T', 'C', 'Y', 'W', {\ldots}     394  
+        463  ['A', 'A', 'C', 'C', 'T', 'T', 'A', 'T', 'C', {\ldots}      35  
+        464  ['T', 'A', 'A', 'G', 'A', 'T', 'A', 'T', 'T', {\ldots}       3  
+        465  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}     545  
+        466  ['C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', {\ldots}       3  
+        467  ['T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', {\ldots}       6  
+        468  ['A', 'A', 'Y', 'C', 'A', 'A', 'T', 'C', 'A', {\ldots}     617  
+        469  ['C', 'K', 'C', 'C', 'G', 'C', 'C', 'G', 'C', {\ldots}      64  
+        470  ['A', 'A', 'T', 'T', 'G', 'T', 'A', 'C', 'G', {\ldots}     734  
+        471  ['R', 'T', 'K', 'A', 'T', 'C', 'A', 'T', 'T', {\ldots}       3  
+        472  ['A', 'C', 'T', 'T', 'W', 'C', 'C', 'A', 'A', {\ldots}     459  
+        473  ['A', 'A', 'A', 'A', 'A', 'N', 'A', 'N', 'T', {\ldots}     124  
+        474  ['G', 'T', 'C', 'C', 'G', 'T', 'A', 'C', 'A', {\ldots}      56  
+        475  ['A', 'C', 'T', 'G', 'T', 'C', 'A', 'G', 'T', {\ldots}      91  
+        476  ['S', 'C', 'A', 'A', 'T', 'S', 'A', 'T', 'T', {\ldots}      11  
+        477  ['D', 'T', 'A', 'C', 'G', 'T', 'C', 'A', 'T', {\ldots}     901  
+        478  ['N', 'T', 'A', 'C', 'C', 'T', 'A', 'A', 'C', {\ldots}     269  
+        479  ['A', 'S', 'C', 'G', 'T', 'A', 'T', 'C', 'T', {\ldots}     450  
+        480  ['G', 'G', 'K', 'G', 'G', 'S', 'C', 'C', 'C', {\ldots}      63  
+        481  ['Y', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}      39  
+        482  ['C', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}      59  
+        483  ['Y', 'G', 'G', 'A', 'A', 'T', 'C', 'T', 'T', {\ldots}      39  
+        484  ['T', 'T', 'T', 'G', 'G', 'C', 'G', 'C', 'C', {\ldots}     283  
+        485  ['T', 'N', 'C', 'T', 'C', 'T', 'G', 'T', 'T', {\ldots}      34  
+        486  ['T', 'T', 'T', 'T', 'G', 'A', 'C', 'T', 'T', {\ldots}     785  
+        487  ['T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', {\ldots}     380  
+        488  ['G', 'A', 'T', 'G', 'A', 'C', 'G', 'T', 'G', {\ldots}       3  
+        
+        [489 rows x 6 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}Importando data frame da analise de fenilpropanoides}
+        \PY{n}{fenilpropanoides} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Log.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{fenilpropanoides}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}                 Gene         ID               Name  \textbackslash{}
+        0                NaN  >MA0020.1               Dof2   
+        1                NaN  >MA0021.1               Dof3   
+        2                NaN  >MA0034.1               Gam1   
+        3                NaN  >MA0044.1              HMG-1   
+        4                NaN  >MA0045.1            HMG-I/Y   
+        5                NaN  >MA0053.1              MNB1A   
+        6                NaN  >MA0054.1            myb.Ph3   
+        7                NaN  >MA0064.1                PBF   
+        8                NaN  >MA0082.1           squamosa   
+        9                NaN  >MA0096.1            bZIP910   
+        10               NaN  >MA0097.1            bZIP911   
+        11               NaN  >MA0120.1                id1   
+        12               NaN  >MA0121.1              ARR10   
+        13               NaN  >MA0123.1               abi4   
+        14               NaN  >MA0127.1               PEND   
+        15               NaN  >MA0128.1             EmBP-1   
+        16               NaN  >MA0129.1              TGA1A   
+        17               NaN  >MA0549.1               BZR2   
+        18               NaN  >MA0551.1                HY5   
+        19               NaN  >MA0552.1               PIF1   
+        20               NaN  >MA0553.1                SMZ   
+        21               NaN  >MA0554.1               SOC1   
+        22               NaN  >MA0555.1                SVP   
+        23               NaN  >MA0556.1                AP3   
+        24               NaN  >MA0557.1               FHY3   
+        25               NaN  >MA0558.1                FLC   
+        26               NaN  >MA0559.1                 PI   
+        27               NaN  >MA0560.1               PIF3   
+        28               NaN  >MA0561.1               PIF4   
+        29               NaN  >MA0562.1               PIF5   
+        {\ldots}              {\ldots}        {\ldots}                {\ldots}   
+        1499  Vigun09g215600  >MA0020.1               Dof2   
+        1500  Vigun09g215600  >MA0021.1               Dof3   
+        1501  Vigun09g215600  >MA0053.1              MNB1A   
+        1502  Vigun09g215600  >MA0064.1                PBF   
+        1503  Vigun09g215600  >MA0096.1            bZIP910   
+        1504  Vigun09g215600  >MA0129.1              TGA1A   
+        1505  Vigun09g215600  >MA0932.1              AHL12   
+        1506  Vigun09g215600  >MA0933.1              AHL20   
+        1507  Vigun09g215600  >MA0934.1              AHL25   
+        1508  Vigun09g215600  >MA0951.1            ATHB-16   
+        1509  Vigun09g215600  >MA0952.1            ATHB-51   
+        1510  Vigun09g215600  >MA0965.1               BIM2   
+        1511  Vigun09g215600  >MA0972.1               CCA1   
+        1512  Vigun09g215600  >MA0977.1             DOF2.5   
+        1513  Vigun09g215600  >MA0981.1             DOF1.8   
+        1514  Vigun09g215600  >MA0982.1             DOF2.4   
+        1515  Vigun09g215600  >MA0983.1             DOF5.6   
+        1516  Vigun09g215600  >MA0987.1  PHYPADRAFT\_140773   
+        1517  Vigun09g215600  >MA0989.1  PHYPADRAFT\_153324   
+        1518  Vigun09g215600  >MA1016.1             GATA15   
+        1519  Vigun09g215600  >MA1022.1   PHYPADRAFT\_38837   
+        1520  Vigun09g215600  >MA1027.1               KAN1   
+        1521  Vigun09g215600  >MA1030.1        P0510F09.23   
+        1522  Vigun09g215600  >MA1047.1               TGA5   
+        1523  Vigun09g215600  >MA1071.1             DOF5.3   
+        1524  Vigun09g215600  >MA1073.1               TRB2   
+        1525  Vigun09g215600  >MA1202.1              AGL55   
+        1526  Vigun09g215600  >MA1276.1          AT3G52440   
+        1527  Vigun09g215600  >MA1322.1               SPL9   
+        1528  Vigun09g215600  >MA1399.1          At5g08520   
+        
+                                                         Motifs  \textbackslash{}
+        0                        ['A', 'A', 'A', 'G', 'C', 'A']   
+        1                        ['A', 'A', 'A', 'G', 'Y', 'G']   
+        2     ['G', 'A', 'Y', 'A', 'A', 'C', 'C', 'G', 'M', {\ldots}   
+        3         ['S', 'T', 'Y', 'G', 'T', 'A', 'Y', 'T', 'Y']   
+        4     ['C', 'A', 'A', 'C', 'A', 'A', 'A', 'T', 'G', {\ldots}   
+        5                             ['A', 'A', 'A', 'G', 'C']   
+        6         ['T', 'A', 'A', 'C', 'C', 'G', 'T', 'T', 'W']   
+        7                             ['A', 'A', 'A', 'G', 'Y']   
+        8     ['M', 'C', 'A', 'W', 'A', 'W', 'A', 'T', 'R', {\ldots}   
+        9                   ['M', 'T', 'G', 'A', 'C', 'G', 'T']   
+        10    ['G', 'R', 'T', 'G', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        11    ['T', 'T', 'K', 'Y', 'C', 'C', 'Y', 'T', 'W', {\ldots}   
+        12             ['A', 'G', 'A', 'T', 'Y', 'Y', 'K', 'C']   
+        13    ['C', 'G', 'S', 'Y', 'G', 'C', 'C', 'C', 'C', {\ldots}   
+        14    ['A', 'C', 'T', 'T', 'C', 'T', 'T', 'A', 'T', {\ldots}   
+        15             ['W', 'S', 'A', 'C', 'G', 'T', 'G', 'G']   
+        16                  ['T', 'A', 'C', 'G', 'T', 'C', 'A']   
+        17    ['C', 'R', 'C', 'A', 'C', 'G', 'T', 'G', 'K', {\ldots}   
+        18    ['A', 'A', 'T', 'G', 'M', 'C', 'A', 'C', 'G', {\ldots}   
+        19    ['R', 'K', 'A', 'R', 'N', 'G', 'W', 'C', 'A', {\ldots}   
+        20             ['C', 'C', 'T', 'C', 'G', 'T', 'A', 'C']   
+        21    ['W', 'T', 'T', 'T', 'T', 'C', 'C', 'W', 'T', {\ldots}   
+        22    ['A', 'W', 'W', 'W', 'C', 'C', 'A', 'A', 'A', {\ldots}   
+        23    ['W', 'T', 'C', 'C', 'A', 'A', 'A', 'A', 'R', {\ldots}   
+        24    ['C', 'W', 'C', 'A', 'C', 'G', 'C', 'G', 'C', {\ldots}   
+        25    ['A', 'A', 'W', 'T', 'T', 'C', 'C', 'A', 'A', {\ldots}   
+        26    ['C', 'C', 'A', 'A', 'A', 'A', 'R', 'A', 'R', {\ldots}   
+        27    ['A', 'G', 'C', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        28             ['C', 'A', 'C', 'G', 'T', 'G', 'G', 'C']   
+        29             ['T', 'C', 'A', 'C', 'R', 'T', 'G', 'S']   
+        {\ldots}                                                 {\ldots}   
+        1499                     ['A', 'A', 'A', 'G', 'C', 'A']   
+        1500                     ['A', 'A', 'A', 'G', 'Y', 'G']   
+        1501                          ['A', 'A', 'A', 'G', 'C']   
+        1502                          ['A', 'A', 'A', 'G', 'Y']   
+        1503                ['M', 'T', 'G', 'A', 'C', 'G', 'T']   
+        1504                ['T', 'A', 'C', 'G', 'T', 'C', 'A']   
+        1505           ['A', 'A', 'W', 'W', 'W', 'W', 'T', 'T']   
+        1506           ['A', 'A', 'T', 'T', 'A', 'A', 'W', 'T']   
+        1507           ['A', 'W', 'T', 'T', 'A', 'A', 'W', 'T']   
+        1508           ['T', 'A', 'A', 'T', 'M', 'A', 'T', 'T']   
+        1509           ['A', 'A', 'T', 'W', 'A', 'T', 'T', 'G']   
+        1510  ['N', 'K', 'C', 'A', 'C', 'G', 'T', 'G', 'M', {\ldots}   
+        1511           ['A', 'A', 'A', 'T', 'A', 'T', 'C', 'T']   
+        1512           ['A', 'W', 'A', 'A', 'A', 'G', 'T', 'G']   
+        1513  ['N', 'A', 'W', 'A', 'A', 'A', 'G', 'T', 'N', {\ldots}   
+        1514                ['A', 'W', 'A', 'A', 'A', 'G', 'T']   
+        1515           ['N', 'A', 'W', 'A', 'A', 'M', 'G', 'T']   
+        1516  ['N', 'A', 'W', 'A', 'A', 'A', 'G', 'T', 'N', {\ldots}   
+        1517      ['N', 'A', 'W', 'A', 'A', 'A', 'G', 'T', 'N']   
+        1518      ['N', 'A', 'T', 'G', 'A', 'T', 'C', 'A', 'N']   
+        1519  ['N', 'A', 'W', 'A', 'A', 'A', 'G', 'T', 'G', {\ldots}   
+        1520           ['A', 'N', 'W', 'T', 'A', 'T', 'T', 'C']   
+        1521  ['W', 'R', 'M', 'C', 'C', 'T', 'A', 'R', 'N', {\ldots}   
+        1522           ['A', 'T', 'G', 'A', 'C', 'G', 'T', 'A']   
+        1523                ['N', 'A', 'W', 'A', 'A', 'M', 'G']   
+        1524           ['W', 'R', 'M', 'C', 'C', 'T', 'A', 'R']   
+        1525                     ['T', 'C', 'A', 'C', 'C', 'A']   
+        1526  ['S', 'A', 'W', 'A', 'A', 'A', 'G', 'K', 'K', {\ldots}   
+        1527  ['A', 'T', 'T', 'G', 'T', 'A', 'C', 'K', 'K', {\ldots}   
+        1528  ['A', 'W', 'W', 'R', 'W', 'R', 'G', 'A', 'T', {\ldots}   
+        
+                                              ReverseComplement  \textbackslash{}
+        0                        ['T', 'G', 'C', 'T', 'T', 'T']   
+        1                        ['C', 'R', 'C', 'T', 'T', 'T']   
+        2     ['G', 'K', 'C', 'G', 'G', 'T', 'T', 'R', 'T', {\ldots}   
+        3         ['R', 'A', 'R', 'T', 'A', 'C', 'R', 'A', 'S']   
+        4     ['R', 'T', 'K', 'T', 'T', 'K', 'C', 'C', 'A', {\ldots}   
+        5                             ['G', 'C', 'T', 'T', 'T']   
+        6         ['W', 'A', 'A', 'C', 'G', 'G', 'T', 'T', 'A']   
+        7                             ['R', 'C', 'T', 'T', 'T']   
+        8     ['A', 'T', 'T', 'W', 'C', 'Y', 'A', 'T', 'W', {\ldots}   
+        9                   ['A', 'C', 'G', 'T', 'C', 'A', 'K']   
+        10    ['G', 'K', 'K', 'C', 'A', 'C', 'G', 'T', 'C', {\ldots}   
+        11    ['C', 'G', 'A', 'W', 'A', 'R', 'G', 'G', 'R', {\ldots}   
+        12             ['G', 'K', 'R', 'R', 'A', 'T', 'C', 'T']   
+        13    ['G', 'G', 'G', 'G', 'G', 'C', 'R', 'S', 'C', {\ldots}   
+        14    ['K', 'A', 'T', 'A', 'A', 'G', 'A', 'A', 'G', {\ldots}   
+        15             ['C', 'C', 'A', 'C', 'G', 'T', 'S', 'W']   
+        16                  ['T', 'G', 'A', 'C', 'G', 'T', 'A']   
+        17    ['Y', 'S', 'K', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        18    ['A', 'A', 'T', 'G', 'K', 'C', 'A', 'C', 'G', {\ldots}   
+        19    ['C', 'C', 'A', 'C', 'G', 'T', 'G', 'W', 'C', {\ldots}   
+        20             ['G', 'T', 'A', 'C', 'G', 'A', 'G', 'G']   
+        21    ['C', 'C', 'A', 'A', 'A', 'A', 'A', 'W', 'G', {\ldots}   
+        22    ['W', 'T', 'Y', 'T', 'T', 'T', 'C', 'C', 'W', {\ldots}   
+        23    ['T', 'T', 'T', 'C', 'Y', 'W', 'Y', 'T', 'T', {\ldots}   
+        24    ['T', 'N', 'A', 'G', 'C', 'G', 'C', 'G', 'T', {\ldots}   
+        25    ['W', 'W', 'C', 'T', 'T', 'T', 'C', 'Y', 'A', {\ldots}   
+        26    ['Y', 'T', 'T', 'T', 'C', 'Y', 'T', 'Y', 'T', {\ldots}   
+        27    ['T', 'C', 'A', 'C', 'G', 'T', 'G', 'G', 'C', {\ldots}   
+        28             ['G', 'C', 'C', 'A', 'C', 'G', 'T', 'G']   
+        29             ['S', 'C', 'A', 'Y', 'G', 'T', 'G', 'A']   
+        {\ldots}                                                 {\ldots}   
+        1499                     ['T', 'G', 'C', 'T', 'T', 'T']   
+        1500                     ['C', 'R', 'C', 'T', 'T', 'T']   
+        1501                          ['G', 'C', 'T', 'T', 'T']   
+        1502                          ['R', 'C', 'T', 'T', 'T']   
+        1503                ['A', 'C', 'G', 'T', 'C', 'A', 'K']   
+        1504                ['T', 'G', 'A', 'C', 'G', 'T', 'A']   
+        1505           ['A', 'A', 'W', 'W', 'W', 'W', 'T', 'T']   
+        1506           ['A', 'W', 'T', 'T', 'A', 'A', 'T', 'T']   
+        1507           ['A', 'W', 'T', 'T', 'A', 'A', 'W', 'T']   
+        1508           ['A', 'A', 'T', 'K', 'A', 'T', 'T', 'A']   
+        1509           ['C', 'A', 'A', 'T', 'W', 'A', 'T', 'T']   
+        1510  ['N', 'K', 'C', 'A', 'C', 'G', 'T', 'G', 'K', {\ldots}   
+        1511           ['A', 'G', 'A', 'T', 'A', 'T', 'T', 'T']   
+        1512           ['C', 'A', 'C', 'T', 'T', 'T', 'W', 'T']   
+        1513  ['N', 'N', 'A', 'C', 'T', 'T', 'T', 'W', 'T', {\ldots}   
+        1514                ['A', 'C', 'T', 'T', 'T', 'W', 'T']   
+        1515           ['A', 'C', 'K', 'T', 'T', 'W', 'T', 'N']   
+        1516  ['N', 'N', 'A', 'C', 'T', 'T', 'T', 'W', 'T', {\ldots}   
+        1517      ['N', 'A', 'C', 'T', 'T', 'T', 'W', 'T', 'N']   
+        1518      ['N', 'T', 'G', 'A', 'T', 'C', 'A', 'T', 'N']   
+        1519  ['N', 'C', 'A', 'C', 'T', 'T', 'T', 'W', 'T', {\ldots}   
+        1520           ['G', 'A', 'A', 'T', 'A', 'W', 'N', 'T']   
+        1521  ['N', 'N', 'Y', 'T', 'A', 'G', 'G', 'K', 'Y', {\ldots}   
+        1522           ['T', 'A', 'C', 'G', 'T', 'C', 'A', 'T']   
+        1523                ['C', 'K', 'T', 'T', 'W', 'T', 'N']   
+        1524           ['Y', 'T', 'A', 'G', 'G', 'K', 'Y', 'W']   
+        1525                     ['T', 'G', 'G', 'T', 'G', 'A']   
+        1526  ['T', 'T', 'K', 'K', 'C', 'T', 'T', 'T', 'W', {\ldots}   
+        1527  ['A', 'W', 'K', 'K', 'G', 'T', 'A', 'C', 'A', {\ldots}   
+        1528  ['Y', 'C', 'T', 'T', 'A', 'T', 'C', 'Y', 'W', {\ldots}   
+        
+                                                       5l3l  \textbackslash{}
+        0                                                 0   
+        1                                                 0   
+        2                                                 0   
+        3                                                 0   
+        4                                                 0   
+        5                                                 0   
+        6                                                 0   
+        7                                                 0   
+        8                                                 0   
+        9                                                 0   
+        10                                                0   
+        11                                                0   
+        12                                                0   
+        13                                                0   
+        14                                                0   
+        15                                                0   
+        16                                                0   
+        17                                                0   
+        18                                                0   
+        19                                                0   
+        20                                                0   
+        21                                                0   
+        22                                                0   
+        23                                                0   
+        24                                                0   
+        25                                                0   
+        26                                                0   
+        27                                                0   
+        28                                                0   
+        29                                                0   
+        {\ldots}                                             {\ldots}   
+        1499                                          [880]   
+        1500                                     [600, 899]   
+        1501                                    [880, 1186]   
+        1502  [77, 210, 224, 600, 693, 832, 880, 899, 1186]   
+        1503                                          [491]   
+        1504                                             []   
+        1505         [96, 652, 885, 1108, 1146, 1399, 1408]   
+        1506                                           [88]   
+        1507                    [88, 109, 1273, 1302, 1497]   
+        1508                                   [1145, 1398]   
+        1509                                             []   
+        1510                                         [1747]   
+        1511                                         [1436]   
+        1512                                          [598]   
+        1513                                 [74, 221, 597]   
+        1514                                 [75, 222, 598]   
+        1515                            [74, 221, 597, 959]   
+        1516                                 [74, 221, 597]   
+        1517                                 [74, 221, 597]   
+        1518                                          [739]   
+        1519                                          [597]   
+        1520                              [981, 1058, 1109]   
+        1521                                             []   
+        1522                                          [491]   
+        1523        [62, 74, 221, 451, 597, 717, 959, 1783]   
+        1524                                             []   
+        1525                                          [541]   
+        1526                                          [597]   
+        1527                                             []   
+        1528                                         [1783]   
+        
+                                                           3l5l         Mean  SUM  
+        0                                                     0     0.000000    0  
+        1                                                     0     0.000000    0  
+        2                                                     0     0.000000    0  
+        3                                                     0     0.000000    0  
+        4                                                     0     0.000000    0  
+        5                                                     0     0.000000    0  
+        6                                                     0     0.000000    0  
+        7                                                     0     0.000000    0  
+        8                                                     0     0.000000    0  
+        9                                                     0     0.000000    0  
+        10                                                    0     0.000000    0  
+        11                                                    0     0.000000    0  
+        12                                                    0     0.000000    0  
+        13                                                    0     0.000000    0  
+        14                                                    0     0.000000    0  
+        15                                                    0     0.000000    0  
+        16                                                    0     0.000000    0  
+        17                                                    0     0.000000    0  
+        18                                                    0     0.000000    0  
+        19                                                    0     0.000000    0  
+        20                                                    0     0.000000    0  
+        21                                                    0     0.000000    0  
+        22                                                    0     0.000000    0  
+        23                                                    0     0.000000    0  
+        24                                                    0     0.000000    0  
+        25                                                    0     0.000000    0  
+        26                                                    0     0.000000    0  
+        27                                                    0     0.000000    0  
+        28                                                    0     0.000000    0  
+        29                                                    0     0.000000    0  
+        {\ldots}                                                 {\ldots}          {\ldots}  {\ldots}  
+        1499                                             [1227]  1053.500000    2  
+        1500                                                 []   749.500000    2  
+        1501                                             [1228]  1098.000000    3  
+        1502                      [311, 1228, 1353, 1617, 1938]   860.571429   14  
+        1503                                                 []   491.000000    1  
+        1504                                              [492]   492.000000    1  
+        1505             [96, 652, 885, 1108, 1146, 1399, 1408]   956.285714   14  
+        1506                                             [1273]   680.500000    2  
+        1507                        [88, 109, 1273, 1302, 1497]   853.800000   10  
+        1508                                              [852]  1131.666667    3  
+        1509                                              [884]   884.000000    1  
+        1510                                                 []  1747.000000    1  
+        1511                                                 []  1436.000000    1  
+        1512                                                 []   598.000000    1  
+        1513                                       [1615, 1936]   888.600000    5  
+        1514                                       [1617, 1938]   890.000000    5  
+        1515                                  [963, 1617, 1938]   909.857143    7  
+        1516                                       [1615, 1936]   888.600000    5  
+        1517                                       [1616, 1937]   889.000000    5  
+        1518                                                 []   739.000000    1  
+        1519                                                 []   597.000000    1  
+        1520                                       [1243, 1359]  1150.000000    5  
+        1521                                              [482]   482.000000    1  
+        1522                                                 []   491.000000    1  
+        1523  [570, 964, 1001, 1077, 1442, 1618, 1834, 1840,{\ldots}  1063.000000   18  
+        1524                                              [484]   484.000000    1  
+        1525                                                 []   541.000000    1  
+        1526                                                 []   597.000000    1  
+        1527                                              [132]   132.000000    1  
+        1528                                                 []  1783.000000    1  
+        
+        [1529 rows x 9 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{i} \PY{o}{=} \PY{n}{fenilpropanoides}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{i}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5l3l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}             ID       Name                                             Matrix  \textbackslash{}
+        0    >MA0020.1       Dof2  [[1.         1.         1.         0.         {\ldots}   
+        1    >MA0021.1       Dof3  [[1.         1.         1.         0.         {\ldots}   
+        2    >MA0034.1       Gam1  [[0.16 0.4  0.12 0.92 1.   0.04 0.12 0.24 0.4 {\ldots}   
+        3    >MA0044.1      HMG-1  [[0.         0.         0.         0.         {\ldots}   
+        4    >MA0045.1    HMG-I/Y  [[0.21428571 0.5        0.64285714 0.21428571 {\ldots}   
+        5    >MA0053.1      MNB1A  [[1.  1.  1.  0.  0.2]\textbackslash{}n [0.  0.  0.  0.  0.6]{\ldots}   
+        6    >MA0054.1    myb.Ph3  [[0.27142857 0.91428571 0.9        0.05714286 {\ldots}   
+        7    >MA0064.1        PBF  [[1.     1.     1.     0.     0.0625]\textbackslash{}n [0.   {\ldots}   
+        8    >MA0082.1   squamosa  [[0.36666667 0.         0.8        0.53333333 {\ldots}   
+        9    >MA0096.1    bZIP910  [[0.42857143 0.         0.         1.         {\ldots}   
+        10   >MA0097.1    bZIP911  [[0.03030303 0.51515152 0.         0.         {\ldots}   
+        11   >MA0120.1        id1  [[0.04166667 0.125      0.04166667 0.         {\ldots}   
+        12   >MA0121.1      ARR10  [[0.93333333 0.         0.93333333 0.         {\ldots}   
+        13   >MA0123.1       abi4  [[0.         0.24489796 0.         0.         {\ldots}   
+        14   >MA0127.1       PEND  [[0.71428571 0.14285714 0.02380952 0.0952381  {\ldots}   
+        15   >MA0128.1     EmBP-1  [[0.69230769 0.07692308 1.         0.         {\ldots}   
+        16   >MA0129.1      TGA1A  [[0.26666667 0.86666667 0.         0.13333333 {\ldots}   
+        17   >MA0549.1       BZR2  [[0.23232323 0.41414141 0.         0.8989899  {\ldots}   
+        18   >MA0551.1        HY5  [[0.321875 0.3375   0.1625   0.028125 0.46875 {\ldots}   
+        19   >MA0552.1       PIF1  [[0.3245614  0.21929825 0.30701754 0.46491228 {\ldots}   
+        20   >MA0553.1        SMZ  [[0.         0.         0.         0.         {\ldots}   
+        21   >MA0554.1       SOC1  [[0.32432432 0.19369369 0.0731982  0.06981982 {\ldots}   
+        22   >MA0555.1        SVP  [[0.30434783 0.30434783 0.30434783 0.35869565 {\ldots}   
+        23   >MA0556.1        AP3  [[0.3161512  0.28865979 0.16494845 0.         {\ldots}   
+        24   >MA0557.1       FHY3  [[0.19574468 0.31914894 0.03829787 0.96170213 {\ldots}   
+        25   >MA0558.1        FLC  [[0.44       0.32727273 0.34545455 0.29818182 {\ldots}   
+        26   >MA0559.1         PI  [[0.27956989 0.10215054 0.63978495 0.80286738 {\ldots}   
+        27   >MA0560.1       PIF3  [[0.39848197 0.11005693 0.03605313 0.         {\ldots}   
+        28   >MA0561.1       PIF4  [[0.         1.         0.         0.14626866 {\ldots}   
+        29   >MA0562.1       PIF5  [[0.         0.         1.         0.         {\ldots}   
+        ..         {\ldots}        {\ldots}                                                {\ldots}   
+        459  >MA1396.1      GATA6  [[0.10791367 0.93764988 0.         1.         {\ldots}   
+        460  >MA1397.1  At1g74840  [[0.5        0.425      0.07666667 0.065      {\ldots}   
+        461  >MA1398.1  At5g47390  [[0.37562604 0.31719533 0.4624374  0.48414023 {\ldots}   
+        462  >MA1399.1  At5g08520  [[0.32441472 0.48829431 0.41471572 0.34949833 {\ldots}   
+        463  >MA1400.1  At1g19000  [[0.45409015 0.53255426 0.47078464 0.05509182 {\ldots}   
+        464  >MA1401.1       EPR1  [[0.42211055 0.70519263 0.99497487 1.         {\ldots}   
+        465  >MA1402.1       BPC6  [[0.12765957 0.09574468 0.06914894 0.07978723 {\ldots}   
+        466  >MA1403.1       BPC5  [[0.93137255 0.02941176 1.         0.01960784 {\ldots}   
+        467  >MA1404.1       BPC1  [[0.15213358 0.8961039  0.0148423  0.92949907 {\ldots}   
+        468  >MA0954.2      ATHB7  [[0.15333333 0.08833333 0.78833333 0.93333333 {\ldots}   
+        469  >MA1000.2     ERF105  [[0.24573379 0.25426621 0.28668942 0.3225256  {\ldots}   
+        470  >MA0586.2      SPL14  [[0.21440823 0.03945111 0.         0.         {\ldots}   
+        471  >MA1026.2     ATHB15  [[0.44915254 0.61525424 0.45423729 0.35932203 {\ldots}   
+        472  >MA0548.2      AGL15  [[0.22203673 0.08013356 0.02671119 0.14023372 {\ldots}   
+        473  >MA0550.2       BZR1  [[0.16156463 0.00680272 0.59693878 0.         {\ldots}   
+        474  >MA1059.2       SPL5  [[0.40802676 0.45652174 0.17056856 0.04180602 {\ldots}   
+        475  >MA1405.1      SIZF2  [[0.16191162 0.8838     0.00263997 0.03329    {\ldots}   
+        476  >MA1406.1      ATHB4  [[2.39200000e-02 8.22550000e-01 9.83480000e-01{\ldots}   
+        477  >MA1407.1     bZIP14  [[0.40640641 0.43756244 0.01698302 0.01698302 {\ldots}   
+        478  >MA1408.1    FaEOBII  [[0.45035    0.21068    0.01124011 0.02313    {\ldots}   
+        479  >MA1409.1     OsRR22  [[0.51257    0.8687     0.00486    0.97906979 {\ldots}   
+        480  >MA1410.1     StBRC1  [[0.11497885 0.02437    0.00419    0.04402    {\ldots}   
+        481  >MA1411.1      TSAR1  [[3.12613126e-01 3.30000000e-02 1.25451255e-01{\ldots}   
+        482  >MA1412.1      TSAR2  [[1.76748233e-01 2.68700000e-02 1.99798002e-02{\ldots}   
+        483  >MA1413.1       UIF1  [[4.23700000e-01 5.56050000e-01 8.60790000e-01{\ldots}   
+        484  >MA1414.1       E2FA  [[2.71536871e-01 2.44658856e-01 1.58511371e-02{\ldots}   
+        485  >MA1415.1       REF6  [[5.37835639e-01 7.14401953e-01 9.37889883e-01{\ldots}   
+        486  >MA1085.2     WRKY40  [[0.38034188 0.45726496 1.         0.         {\ldots}   
+        487  >MA1416.1    RAMOSA1  [[1.36283470e-01 7.51362835e-01 1.00034739e-01{\ldots}   
+        488  >MA1417.1         O2  [[1.50147203e-01 6.32973503e-02 1.42296369e-02{\ldots}   
+        
+                                                        Motifs  \textbackslash{}
+        0                       ['A', 'A', 'A', 'G', 'C', 'A']   
+        1                       ['A', 'A', 'A', 'G', 'Y', 'G']   
+        2    ['G', 'A', 'Y', 'A', 'A', 'C', 'C', 'G', 'M', {\ldots}   
+        3        ['S', 'T', 'Y', 'G', 'T', 'A', 'Y', 'T', 'Y']   
+        4    ['C', 'A', 'A', 'C', 'A', 'A', 'A', 'T', 'G', {\ldots}   
+        5                            ['A', 'A', 'A', 'G', 'C']   
+        6        ['T', 'A', 'A', 'C', 'C', 'G', 'T', 'T', 'W']   
+        7                            ['A', 'A', 'A', 'G', 'Y']   
+        8    ['M', 'C', 'A', 'W', 'A', 'W', 'A', 'T', 'R', {\ldots}   
+        9                  ['M', 'T', 'G', 'A', 'C', 'G', 'T']   
+        10   ['G', 'R', 'T', 'G', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        11   ['T', 'T', 'K', 'Y', 'C', 'C', 'Y', 'T', 'W', {\ldots}   
+        12            ['A', 'G', 'A', 'T', 'Y', 'Y', 'K', 'C']   
+        13   ['C', 'G', 'S', 'Y', 'G', 'C', 'C', 'C', 'C', {\ldots}   
+        14   ['A', 'C', 'T', 'T', 'C', 'T', 'T', 'A', 'T', {\ldots}   
+        15            ['W', 'S', 'A', 'C', 'G', 'T', 'G', 'G']   
+        16                 ['T', 'A', 'C', 'G', 'T', 'C', 'A']   
+        17   ['C', 'R', 'C', 'A', 'C', 'G', 'T', 'G', 'K', {\ldots}   
+        18   ['A', 'A', 'T', 'G', 'M', 'C', 'A', 'C', 'G', {\ldots}   
+        19   ['R', 'K', 'A', 'R', 'N', 'G', 'W', 'C', 'A', {\ldots}   
+        20            ['C', 'C', 'T', 'C', 'G', 'T', 'A', 'C']   
+        21   ['W', 'T', 'T', 'T', 'T', 'C', 'C', 'W', 'T', {\ldots}   
+        22   ['A', 'W', 'W', 'W', 'C', 'C', 'A', 'A', 'A', {\ldots}   
+        23   ['W', 'T', 'C', 'C', 'A', 'A', 'A', 'A', 'R', {\ldots}   
+        24   ['C', 'W', 'C', 'A', 'C', 'G', 'C', 'G', 'C', {\ldots}   
+        25   ['A', 'A', 'W', 'T', 'T', 'C', 'C', 'A', 'A', {\ldots}   
+        26   ['C', 'C', 'A', 'A', 'A', 'A', 'R', 'A', 'R', {\ldots}   
+        27   ['A', 'G', 'C', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        28            ['C', 'A', 'C', 'G', 'T', 'G', 'G', 'C']   
+        29            ['T', 'C', 'A', 'C', 'R', 'T', 'G', 'S']   
+        ..                                                 {\ldots}   
+        459  ['Y', 'A', 'G', 'A', 'T', 'C', 'T', 'A', 'G', {\ldots}   
+        460  ['W', 'W', 'T', 'G', 'G', 'A', 'T', 'A', 'A', {\ldots}   
+        461  ['W', 'W', 'W', 'A', 'Y', 'C', 'T', 'T', 'A', {\ldots}   
+        462  ['A', 'W', 'W', 'R', 'W', 'R', 'G', 'A', 'T', {\ldots}   
+        463  ['W', 'W', 'A', 'T', 'G', 'G', 'A', 'T', 'A', {\ldots}   
+        464  ['A', 'A', 'A', 'A', 'A', 'T', 'A', 'T', 'C', {\ldots}   
+        465  ['C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', {\ldots}   
+        466  ['A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', {\ldots}   
+        467  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}   
+        468  ['T', 'C', 'A', 'A', 'T', 'G', 'A', 'T', 'T', {\ldots}   
+        469  ['G', 'Y', 'G', 'R', 'Y', 'G', 'G', 'C', 'G', {\ldots}   
+        470  ['T', 'C', 'C', 'G', 'T', 'A', 'C', 'A', 'A', {\ldots}   
+        471  ['A', 'A', 'W', 'W', 'R', 'T', 'A', 'A', 'T', {\ldots}   
+        472  ['C', 'T', 'T', 'T', 'C', 'C', 'W', 'T', 'T', {\ldots}   
+        473  ['C', 'C', 'R', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        474  ['A', 'A', 'T', 'T', 'G', 'T', 'A', 'C', 'G', {\ldots}   
+        475  ['G', 'A', 'C', 'T', 'G', 'A', 'C', 'A', 'G', {\ldots}   
+        476  ['Y', 'A', 'A', 'T', 'S', 'A', 'T', 'T', 'G', {\ldots}   
+        477  ['A', 'A', 'T', 'G', 'A', 'C', 'G', 'T', 'A', {\ldots}   
+        478  ['A', 'G', 'T', 'T', 'A', 'G', 'G', 'T', 'A', {\ldots}   
+        479  ['A', 'A', 'G', 'A', 'T', 'A', 'C', 'G', 'S', {\ldots}   
+        480  ['G', 'G', 'G', 'G', 'S', 'C', 'C', 'M', 'C', {\ldots}   
+        481  ['A', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}   
+        482  ['T', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}   
+        483  ['A', 'A', 'A', 'G', 'A', 'T', 'T', 'C', 'C', {\ldots}   
+        484  ['T', 'G', 'G', 'C', 'G', 'C', 'C', 'A', 'A', {\ldots}   
+        485  ['R', 'A', 'A', 'A', 'C', 'A', 'G', 'A', 'G', {\ldots}   
+        486  ['A', 'A', 'A', 'G', 'T', 'C', 'A', 'A', 'A', {\ldots}   
+        487  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}   
+        488  ['G', 'T', 'G', 'C', 'C', 'A', 'C', 'G', 'T', {\ldots}   
+        
+                                             ReverseComplement  Genome  Cluster  
+        0                       ['T', 'G', 'C', 'T', 'T', 'T']       5        1  
+        1                       ['C', 'R', 'C', 'T', 'T', 'T']       1        1  
+        2    ['G', 'K', 'C', 'G', 'G', 'T', 'T', 'R', 'T', {\ldots}      91        1  
+        3        ['R', 'A', 'R', 'T', 'A', 'C', 'R', 'A', 'S']   21726       31  
+        4    ['R', 'T', 'K', 'T', 'T', 'K', 'C', 'C', 'A', {\ldots}   25575       36  
+        5                            ['G', 'C', 'T', 'T', 'T']      79        1  
+        6        ['W', 'A', 'A', 'C', 'G', 'G', 'T', 'T', 'A']    7181       12  
+        7                            ['R', 'C', 'T', 'T', 'T']       2        1  
+        8    ['A', 'T', 'T', 'W', 'C', 'Y', 'A', 'T', 'W', {\ldots}   27431       35  
+        9                  ['A', 'C', 'G', 'T', 'C', 'A', 'K']     957        5  
+        10   ['G', 'K', 'K', 'C', 'A', 'C', 'G', 'T', 'C', {\ldots}   29717       39  
+        11   ['C', 'G', 'A', 'W', 'A', 'R', 'G', 'G', 'R', {\ldots}     178        2  
+        12            ['G', 'K', 'R', 'R', 'A', 'T', 'C', 'T']    4041        7  
+        13   ['G', 'G', 'G', 'G', 'G', 'C', 'R', 'S', 'C', {\ldots}      20        1  
+        14   ['K', 'A', 'T', 'A', 'A', 'G', 'A', 'A', 'G', {\ldots}      13        2  
+        15            ['C', 'C', 'A', 'C', 'G', 'T', 'S', 'W']     103        1  
+        16                 ['T', 'G', 'A', 'C', 'G', 'T', 'A']    8031       13  
+        17   ['Y', 'S', 'K', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}      22        1  
+        18   ['A', 'A', 'T', 'G', 'K', 'C', 'A', 'C', 'G', {\ldots}     551        3  
+        19   ['C', 'C', 'A', 'C', 'G', 'T', 'G', 'W', 'C', {\ldots}    3780        4  
+        20            ['G', 'T', 'A', 'C', 'G', 'A', 'G', 'G']    2411        3  
+        21   ['C', 'C', 'A', 'A', 'A', 'A', 'A', 'W', 'G', {\ldots}       1        1  
+        22   ['W', 'T', 'Y', 'T', 'T', 'T', 'C', 'C', 'W', {\ldots}     170        1  
+        23   ['T', 'T', 'T', 'C', 'Y', 'W', 'Y', 'T', 'T', {\ldots}       1        1  
+        24   ['T', 'N', 'A', 'G', 'C', 'G', 'C', 'G', 'T', {\ldots}       9        1  
+        25   ['W', 'W', 'C', 'T', 'T', 'T', 'C', 'Y', 'A', {\ldots}     165        1  
+        26   ['Y', 'T', 'T', 'T', 'C', 'Y', 'T', 'Y', 'T', {\ldots}     375        1  
+        27   ['T', 'C', 'A', 'C', 'G', 'T', 'G', 'G', 'C', {\ldots}       8        1  
+        28            ['G', 'C', 'C', 'A', 'C', 'G', 'T', 'G']       2        1  
+        29            ['S', 'C', 'A', 'Y', 'G', 'T', 'G', 'A']      42        1  
+        ..                                                 {\ldots}     {\ldots}      {\ldots}  
+        459  ['A', 'G', 'A', 'T', 'C', 'T', 'A', 'G', 'A', {\ldots}    7144        7  
+        460  ['Y', 'C', 'T', 'T', 'A', 'T', 'C', 'C', 'A', {\ldots}       6        1  
+        461  ['W', 'W', 'T', 'G', 'G', 'A', 'T', 'A', 'A', {\ldots}       5        1  
+        462  ['Y', 'C', 'T', 'T', 'A', 'T', 'C', 'Y', 'W', {\ldots}     394        1  
+        463  ['A', 'A', 'C', 'C', 'T', 'T', 'A', 'T', 'C', {\ldots}      35        1  
+        464  ['T', 'A', 'A', 'G', 'A', 'T', 'A', 'T', 'T', {\ldots}       3        1  
+        465  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}     545        2  
+        466  ['C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', {\ldots}       3        1  
+        467  ['T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', {\ldots}       6        1  
+        468  ['A', 'A', 'Y', 'C', 'A', 'A', 'T', 'C', 'A', {\ldots}     617        2  
+        469  ['C', 'K', 'C', 'C', 'G', 'C', 'C', 'G', 'C', {\ldots}      64        1  
+        470  ['A', 'A', 'T', 'T', 'G', 'T', 'A', 'C', 'G', {\ldots}     734        5  
+        471  ['R', 'T', 'K', 'A', 'T', 'C', 'A', 'T', 'T', {\ldots}       3        1  
+        472  ['A', 'C', 'T', 'T', 'W', 'C', 'C', 'A', 'A', {\ldots}     459        3  
+        473  ['A', 'A', 'A', 'A', 'A', 'N', 'A', 'N', 'T', {\ldots}     124        1  
+        474  ['G', 'T', 'C', 'C', 'G', 'T', 'A', 'C', 'A', {\ldots}      56        1  
+        475  ['A', 'C', 'T', 'G', 'T', 'C', 'A', 'G', 'T', {\ldots}      91        1  
+        476  ['S', 'C', 'A', 'A', 'T', 'S', 'A', 'T', 'T', {\ldots}      11        1  
+        477  ['D', 'T', 'A', 'C', 'G', 'T', 'C', 'A', 'T', {\ldots}     901        3  
+        478  ['N', 'T', 'A', 'C', 'C', 'T', 'A', 'A', 'C', {\ldots}     269        1  
+        479  ['A', 'S', 'C', 'G', 'T', 'A', 'T', 'C', 'T', {\ldots}     450        1  
+        480  ['G', 'G', 'K', 'G', 'G', 'S', 'C', 'C', 'C', {\ldots}      63        1  
+        481  ['Y', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}      39        1  
+        482  ['C', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}      59        1  
+        483  ['Y', 'G', 'G', 'A', 'A', 'T', 'C', 'T', 'T', {\ldots}      39        1  
+        484  ['T', 'T', 'T', 'G', 'G', 'C', 'G', 'C', 'C', {\ldots}     283        1  
+        485  ['T', 'N', 'C', 'T', 'C', 'T', 'G', 'T', 'T', {\ldots}      34        1  
+        486  ['T', 'T', 'T', 'T', 'G', 'A', 'C', 'T', 'T', {\ldots}     785        2  
+        487  ['T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', {\ldots}     380        1  
+        488  ['G', 'A', 'T', 'G', 'A', 'C', 'G', 'T', 'G', {\ldots}       3        1  
+        
+        [489 rows x 7 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}             ID       Name                                             Matrix  \textbackslash{}
+        0    >MA0020.1       Dof2  [[1.         1.         1.         0.         {\ldots}   
+        1    >MA0021.1       Dof3  [[1.         1.         1.         0.         {\ldots}   
+        2    >MA0034.1       Gam1  [[0.16 0.4  0.12 0.92 1.   0.04 0.12 0.24 0.4 {\ldots}   
+        3    >MA0044.1      HMG-1  [[0.         0.         0.         0.         {\ldots}   
+        4    >MA0045.1    HMG-I/Y  [[0.21428571 0.5        0.64285714 0.21428571 {\ldots}   
+        5    >MA0053.1      MNB1A  [[1.  1.  1.  0.  0.2]\textbackslash{}n [0.  0.  0.  0.  0.6]{\ldots}   
+        6    >MA0054.1    myb.Ph3  [[0.27142857 0.91428571 0.9        0.05714286 {\ldots}   
+        7    >MA0064.1        PBF  [[1.     1.     1.     0.     0.0625]\textbackslash{}n [0.   {\ldots}   
+        8    >MA0082.1   squamosa  [[0.36666667 0.         0.8        0.53333333 {\ldots}   
+        9    >MA0096.1    bZIP910  [[0.42857143 0.         0.         1.         {\ldots}   
+        10   >MA0097.1    bZIP911  [[0.03030303 0.51515152 0.         0.         {\ldots}   
+        11   >MA0120.1        id1  [[0.04166667 0.125      0.04166667 0.         {\ldots}   
+        12   >MA0121.1      ARR10  [[0.93333333 0.         0.93333333 0.         {\ldots}   
+        13   >MA0123.1       abi4  [[0.         0.24489796 0.         0.         {\ldots}   
+        14   >MA0127.1       PEND  [[0.71428571 0.14285714 0.02380952 0.0952381  {\ldots}   
+        15   >MA0128.1     EmBP-1  [[0.69230769 0.07692308 1.         0.         {\ldots}   
+        16   >MA0129.1      TGA1A  [[0.26666667 0.86666667 0.         0.13333333 {\ldots}   
+        17   >MA0549.1       BZR2  [[0.23232323 0.41414141 0.         0.8989899  {\ldots}   
+        18   >MA0551.1        HY5  [[0.321875 0.3375   0.1625   0.028125 0.46875 {\ldots}   
+        19   >MA0552.1       PIF1  [[0.3245614  0.21929825 0.30701754 0.46491228 {\ldots}   
+        20   >MA0553.1        SMZ  [[0.         0.         0.         0.         {\ldots}   
+        21   >MA0554.1       SOC1  [[0.32432432 0.19369369 0.0731982  0.06981982 {\ldots}   
+        22   >MA0555.1        SVP  [[0.30434783 0.30434783 0.30434783 0.35869565 {\ldots}   
+        23   >MA0556.1        AP3  [[0.3161512  0.28865979 0.16494845 0.         {\ldots}   
+        24   >MA0557.1       FHY3  [[0.19574468 0.31914894 0.03829787 0.96170213 {\ldots}   
+        25   >MA0558.1        FLC  [[0.44       0.32727273 0.34545455 0.29818182 {\ldots}   
+        26   >MA0559.1         PI  [[0.27956989 0.10215054 0.63978495 0.80286738 {\ldots}   
+        27   >MA0560.1       PIF3  [[0.39848197 0.11005693 0.03605313 0.         {\ldots}   
+        28   >MA0561.1       PIF4  [[0.         1.         0.         0.14626866 {\ldots}   
+        29   >MA0562.1       PIF5  [[0.         0.         1.         0.         {\ldots}   
+        ..         {\ldots}        {\ldots}                                                {\ldots}   
+        459  >MA1396.1      GATA6  [[0.10791367 0.93764988 0.         1.         {\ldots}   
+        460  >MA1397.1  At1g74840  [[0.5        0.425      0.07666667 0.065      {\ldots}   
+        461  >MA1398.1  At5g47390  [[0.37562604 0.31719533 0.4624374  0.48414023 {\ldots}   
+        462  >MA1399.1  At5g08520  [[0.32441472 0.48829431 0.41471572 0.34949833 {\ldots}   
+        463  >MA1400.1  At1g19000  [[0.45409015 0.53255426 0.47078464 0.05509182 {\ldots}   
+        464  >MA1401.1       EPR1  [[0.42211055 0.70519263 0.99497487 1.         {\ldots}   
+        465  >MA1402.1       BPC6  [[0.12765957 0.09574468 0.06914894 0.07978723 {\ldots}   
+        466  >MA1403.1       BPC5  [[0.93137255 0.02941176 1.         0.01960784 {\ldots}   
+        467  >MA1404.1       BPC1  [[0.15213358 0.8961039  0.0148423  0.92949907 {\ldots}   
+        468  >MA0954.2      ATHB7  [[0.15333333 0.08833333 0.78833333 0.93333333 {\ldots}   
+        469  >MA1000.2     ERF105  [[0.24573379 0.25426621 0.28668942 0.3225256  {\ldots}   
+        470  >MA0586.2      SPL14  [[0.21440823 0.03945111 0.         0.         {\ldots}   
+        471  >MA1026.2     ATHB15  [[0.44915254 0.61525424 0.45423729 0.35932203 {\ldots}   
+        472  >MA0548.2      AGL15  [[0.22203673 0.08013356 0.02671119 0.14023372 {\ldots}   
+        473  >MA0550.2       BZR1  [[0.16156463 0.00680272 0.59693878 0.         {\ldots}   
+        474  >MA1059.2       SPL5  [[0.40802676 0.45652174 0.17056856 0.04180602 {\ldots}   
+        475  >MA1405.1      SIZF2  [[0.16191162 0.8838     0.00263997 0.03329    {\ldots}   
+        476  >MA1406.1      ATHB4  [[2.39200000e-02 8.22550000e-01 9.83480000e-01{\ldots}   
+        477  >MA1407.1     bZIP14  [[0.40640641 0.43756244 0.01698302 0.01698302 {\ldots}   
+        478  >MA1408.1    FaEOBII  [[0.45035    0.21068    0.01124011 0.02313    {\ldots}   
+        479  >MA1409.1     OsRR22  [[0.51257    0.8687     0.00486    0.97906979 {\ldots}   
+        480  >MA1410.1     StBRC1  [[0.11497885 0.02437    0.00419    0.04402    {\ldots}   
+        481  >MA1411.1      TSAR1  [[3.12613126e-01 3.30000000e-02 1.25451255e-01{\ldots}   
+        482  >MA1412.1      TSAR2  [[1.76748233e-01 2.68700000e-02 1.99798002e-02{\ldots}   
+        483  >MA1413.1       UIF1  [[4.23700000e-01 5.56050000e-01 8.60790000e-01{\ldots}   
+        484  >MA1414.1       E2FA  [[2.71536871e-01 2.44658856e-01 1.58511371e-02{\ldots}   
+        485  >MA1415.1       REF6  [[5.37835639e-01 7.14401953e-01 9.37889883e-01{\ldots}   
+        486  >MA1085.2     WRKY40  [[0.38034188 0.45726496 1.         0.         {\ldots}   
+        487  >MA1416.1    RAMOSA1  [[1.36283470e-01 7.51362835e-01 1.00034739e-01{\ldots}   
+        488  >MA1417.1         O2  [[1.50147203e-01 6.32973503e-02 1.42296369e-02{\ldots}   
+        
+                                                        Motifs  \textbackslash{}
+        0                       ['A', 'A', 'A', 'G', 'C', 'A']   
+        1                       ['A', 'A', 'A', 'G', 'Y', 'G']   
+        2    ['G', 'A', 'Y', 'A', 'A', 'C', 'C', 'G', 'M', {\ldots}   
+        3        ['S', 'T', 'Y', 'G', 'T', 'A', 'Y', 'T', 'Y']   
+        4    ['C', 'A', 'A', 'C', 'A', 'A', 'A', 'T', 'G', {\ldots}   
+        5                            ['A', 'A', 'A', 'G', 'C']   
+        6        ['T', 'A', 'A', 'C', 'C', 'G', 'T', 'T', 'W']   
+        7                            ['A', 'A', 'A', 'G', 'Y']   
+        8    ['M', 'C', 'A', 'W', 'A', 'W', 'A', 'T', 'R', {\ldots}   
+        9                  ['M', 'T', 'G', 'A', 'C', 'G', 'T']   
+        10   ['G', 'R', 'T', 'G', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        11   ['T', 'T', 'K', 'Y', 'C', 'C', 'Y', 'T', 'W', {\ldots}   
+        12            ['A', 'G', 'A', 'T', 'Y', 'Y', 'K', 'C']   
+        13   ['C', 'G', 'S', 'Y', 'G', 'C', 'C', 'C', 'C', {\ldots}   
+        14   ['A', 'C', 'T', 'T', 'C', 'T', 'T', 'A', 'T', {\ldots}   
+        15            ['W', 'S', 'A', 'C', 'G', 'T', 'G', 'G']   
+        16                 ['T', 'A', 'C', 'G', 'T', 'C', 'A']   
+        17   ['C', 'R', 'C', 'A', 'C', 'G', 'T', 'G', 'K', {\ldots}   
+        18   ['A', 'A', 'T', 'G', 'M', 'C', 'A', 'C', 'G', {\ldots}   
+        19   ['R', 'K', 'A', 'R', 'N', 'G', 'W', 'C', 'A', {\ldots}   
+        20            ['C', 'C', 'T', 'C', 'G', 'T', 'A', 'C']   
+        21   ['W', 'T', 'T', 'T', 'T', 'C', 'C', 'W', 'T', {\ldots}   
+        22   ['A', 'W', 'W', 'W', 'C', 'C', 'A', 'A', 'A', {\ldots}   
+        23   ['W', 'T', 'C', 'C', 'A', 'A', 'A', 'A', 'R', {\ldots}   
+        24   ['C', 'W', 'C', 'A', 'C', 'G', 'C', 'G', 'C', {\ldots}   
+        25   ['A', 'A', 'W', 'T', 'T', 'C', 'C', 'A', 'A', {\ldots}   
+        26   ['C', 'C', 'A', 'A', 'A', 'A', 'R', 'A', 'R', {\ldots}   
+        27   ['A', 'G', 'C', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        28            ['C', 'A', 'C', 'G', 'T', 'G', 'G', 'C']   
+        29            ['T', 'C', 'A', 'C', 'R', 'T', 'G', 'S']   
+        ..                                                 {\ldots}   
+        459  ['Y', 'A', 'G', 'A', 'T', 'C', 'T', 'A', 'G', {\ldots}   
+        460  ['W', 'W', 'T', 'G', 'G', 'A', 'T', 'A', 'A', {\ldots}   
+        461  ['W', 'W', 'W', 'A', 'Y', 'C', 'T', 'T', 'A', {\ldots}   
+        462  ['A', 'W', 'W', 'R', 'W', 'R', 'G', 'A', 'T', {\ldots}   
+        463  ['W', 'W', 'A', 'T', 'G', 'G', 'A', 'T', 'A', {\ldots}   
+        464  ['A', 'A', 'A', 'A', 'A', 'T', 'A', 'T', 'C', {\ldots}   
+        465  ['C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', {\ldots}   
+        466  ['A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', {\ldots}   
+        467  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}   
+        468  ['T', 'C', 'A', 'A', 'T', 'G', 'A', 'T', 'T', {\ldots}   
+        469  ['G', 'Y', 'G', 'R', 'Y', 'G', 'G', 'C', 'G', {\ldots}   
+        470  ['T', 'C', 'C', 'G', 'T', 'A', 'C', 'A', 'A', {\ldots}   
+        471  ['A', 'A', 'W', 'W', 'R', 'T', 'A', 'A', 'T', {\ldots}   
+        472  ['C', 'T', 'T', 'T', 'C', 'C', 'W', 'T', 'T', {\ldots}   
+        473  ['C', 'C', 'R', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}   
+        474  ['A', 'A', 'T', 'T', 'G', 'T', 'A', 'C', 'G', {\ldots}   
+        475  ['G', 'A', 'C', 'T', 'G', 'A', 'C', 'A', 'G', {\ldots}   
+        476  ['Y', 'A', 'A', 'T', 'S', 'A', 'T', 'T', 'G', {\ldots}   
+        477  ['A', 'A', 'T', 'G', 'A', 'C', 'G', 'T', 'A', {\ldots}   
+        478  ['A', 'G', 'T', 'T', 'A', 'G', 'G', 'T', 'A', {\ldots}   
+        479  ['A', 'A', 'G', 'A', 'T', 'A', 'C', 'G', 'S', {\ldots}   
+        480  ['G', 'G', 'G', 'G', 'S', 'C', 'C', 'M', 'C', {\ldots}   
+        481  ['A', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}   
+        482  ['T', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}   
+        483  ['A', 'A', 'A', 'G', 'A', 'T', 'T', 'C', 'C', {\ldots}   
+        484  ['T', 'G', 'G', 'C', 'G', 'C', 'C', 'A', 'A', {\ldots}   
+        485  ['R', 'A', 'A', 'A', 'C', 'A', 'G', 'A', 'G', {\ldots}   
+        486  ['A', 'A', 'A', 'G', 'T', 'C', 'A', 'A', 'A', {\ldots}   
+        487  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}   
+        488  ['G', 'T', 'G', 'C', 'C', 'A', 'C', 'G', 'T', {\ldots}   
+        
+                                             ReverseComplement  Genome  Cluster  
+        0                       ['T', 'G', 'C', 'T', 'T', 'T']       5        1  
+        1                       ['C', 'R', 'C', 'T', 'T', 'T']       1        1  
+        2    ['G', 'K', 'C', 'G', 'G', 'T', 'T', 'R', 'T', {\ldots}      91        1  
+        3        ['R', 'A', 'R', 'T', 'A', 'C', 'R', 'A', 'S']   21726       31  
+        4    ['R', 'T', 'K', 'T', 'T', 'K', 'C', 'C', 'A', {\ldots}   25575       36  
+        5                            ['G', 'C', 'T', 'T', 'T']      79        1  
+        6        ['W', 'A', 'A', 'C', 'G', 'G', 'T', 'T', 'A']    7181       12  
+        7                            ['R', 'C', 'T', 'T', 'T']       2        1  
+        8    ['A', 'T', 'T', 'W', 'C', 'Y', 'A', 'T', 'W', {\ldots}   27431       35  
+        9                  ['A', 'C', 'G', 'T', 'C', 'A', 'K']     957        5  
+        10   ['G', 'K', 'K', 'C', 'A', 'C', 'G', 'T', 'C', {\ldots}   29717       39  
+        11   ['C', 'G', 'A', 'W', 'A', 'R', 'G', 'G', 'R', {\ldots}     178        2  
+        12            ['G', 'K', 'R', 'R', 'A', 'T', 'C', 'T']    4041        7  
+        13   ['G', 'G', 'G', 'G', 'G', 'C', 'R', 'S', 'C', {\ldots}      20        1  
+        14   ['K', 'A', 'T', 'A', 'A', 'G', 'A', 'A', 'G', {\ldots}      13        2  
+        15            ['C', 'C', 'A', 'C', 'G', 'T', 'S', 'W']     103        1  
+        16                 ['T', 'G', 'A', 'C', 'G', 'T', 'A']    8031       13  
+        17   ['Y', 'S', 'K', 'C', 'A', 'C', 'G', 'T', 'G', {\ldots}      22        1  
+        18   ['A', 'A', 'T', 'G', 'K', 'C', 'A', 'C', 'G', {\ldots}     551        3  
+        19   ['C', 'C', 'A', 'C', 'G', 'T', 'G', 'W', 'C', {\ldots}    3780        4  
+        20            ['G', 'T', 'A', 'C', 'G', 'A', 'G', 'G']    2411        3  
+        21   ['C', 'C', 'A', 'A', 'A', 'A', 'A', 'W', 'G', {\ldots}       1        1  
+        22   ['W', 'T', 'Y', 'T', 'T', 'T', 'C', 'C', 'W', {\ldots}     170        1  
+        23   ['T', 'T', 'T', 'C', 'Y', 'W', 'Y', 'T', 'T', {\ldots}       1        1  
+        24   ['T', 'N', 'A', 'G', 'C', 'G', 'C', 'G', 'T', {\ldots}       9        1  
+        25   ['W', 'W', 'C', 'T', 'T', 'T', 'C', 'Y', 'A', {\ldots}     165        1  
+        26   ['Y', 'T', 'T', 'T', 'C', 'Y', 'T', 'Y', 'T', {\ldots}     375        1  
+        27   ['T', 'C', 'A', 'C', 'G', 'T', 'G', 'G', 'C', {\ldots}       8        1  
+        28            ['G', 'C', 'C', 'A', 'C', 'G', 'T', 'G']       2        1  
+        29            ['S', 'C', 'A', 'Y', 'G', 'T', 'G', 'A']      42        1  
+        ..                                                 {\ldots}     {\ldots}      {\ldots}  
+        459  ['A', 'G', 'A', 'T', 'C', 'T', 'A', 'G', 'A', {\ldots}    7144        7  
+        460  ['Y', 'C', 'T', 'T', 'A', 'T', 'C', 'C', 'A', {\ldots}       6        1  
+        461  ['W', 'W', 'T', 'G', 'G', 'A', 'T', 'A', 'A', {\ldots}       5        1  
+        462  ['Y', 'C', 'T', 'T', 'A', 'T', 'C', 'Y', 'W', {\ldots}     394        1  
+        463  ['A', 'A', 'C', 'C', 'T', 'T', 'A', 'T', 'C', {\ldots}      35        1  
+        464  ['T', 'A', 'A', 'G', 'A', 'T', 'A', 'T', 'T', {\ldots}       3        1  
+        465  ['G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'G', {\ldots}     545        2  
+        466  ['C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', {\ldots}       3        1  
+        467  ['T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', {\ldots}       6        1  
+        468  ['A', 'A', 'Y', 'C', 'A', 'A', 'T', 'C', 'A', {\ldots}     617        2  
+        469  ['C', 'K', 'C', 'C', 'G', 'C', 'C', 'G', 'C', {\ldots}      64        1  
+        470  ['A', 'A', 'T', 'T', 'G', 'T', 'A', 'C', 'G', {\ldots}     734        5  
+        471  ['R', 'T', 'K', 'A', 'T', 'C', 'A', 'T', 'T', {\ldots}       3        1  
+        472  ['A', 'C', 'T', 'T', 'W', 'C', 'C', 'A', 'A', {\ldots}     459        3  
+        473  ['A', 'A', 'A', 'A', 'A', 'N', 'A', 'N', 'T', {\ldots}     124        1  
+        474  ['G', 'T', 'C', 'C', 'G', 'T', 'A', 'C', 'A', {\ldots}      56        1  
+        475  ['A', 'C', 'T', 'G', 'T', 'C', 'A', 'G', 'T', {\ldots}      91        1  
+        476  ['S', 'C', 'A', 'A', 'T', 'S', 'A', 'T', 'T', {\ldots}      11        1  
+        477  ['D', 'T', 'A', 'C', 'G', 'T', 'C', 'A', 'T', {\ldots}     901        3  
+        478  ['N', 'T', 'A', 'C', 'C', 'T', 'A', 'A', 'C', {\ldots}     269        1  
+        479  ['A', 'S', 'C', 'G', 'T', 'A', 'T', 'C', 'T', {\ldots}     450        1  
+        480  ['G', 'G', 'K', 'G', 'G', 'S', 'C', 'C', 'C', {\ldots}      63        1  
+        481  ['Y', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}      39        1  
+        482  ['C', 'G', 'C', 'A', 'C', 'G', 'T', 'G', 'C', {\ldots}      59        1  
+        483  ['Y', 'G', 'G', 'A', 'A', 'T', 'C', 'T', 'T', {\ldots}      39        1  
+        484  ['T', 'T', 'T', 'G', 'G', 'C', 'G', 'C', 'C', {\ldots}     283        1  
+        485  ['T', 'N', 'C', 'T', 'C', 'T', 'G', 'T', 'T', {\ldots}      34        1  
+        486  ['T', 'T', 'T', 'T', 'G', 'A', 'C', 'T', 'T', {\ldots}     785        2  
+        487  ['T', 'C', 'T', 'C', 'T', 'C', 'T', 'C', 'T', {\ldots}     380        1  
+        488  ['G', 'A', 'T', 'G', 'A', 'C', 'G', 'T', 'G', {\ldots}       3        1  
+        
+        [489 rows x 7 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{path\PYZus{}or\PYZus{}buf}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Process Log.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                  \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{model} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster \PYZti{} Name + Genome}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}
+        \PY{n}{result} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{enrichment} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{result}\PY{o}{.}\PY{n}{params}\PY{p}{,}\PY{n}{result}\PY{o}{.}\PY{n}{bse}\PY{p}{,}\PY{n}{result}\PY{o}{.}\PY{n}{tvalues}\PY{p}{,}\PY{n}{result}\PY{o}{.}\PY{n}{pvalues}\PY{p}{]}\PY{p}{,}
+                   \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{keys}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coef}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{enrichment}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}                                 coef        SE          t   p-value
+         Intercept                   0.820827  0.029267  28.045759  0.001269
+         Name[T.ABF2]               -0.390783  0.043082  -9.070662  0.011937
+         Name[T.ABF3]                0.116875  0.040392   2.893482  0.101569
+         Name[T.ABI3]                0.178659  0.040756   4.383645  0.048300
+         Name[T.ABI5]                0.177114  0.040745   4.346908  0.049060
+         Name[T.ABR1]                0.178659  0.040756   4.383645  0.048300
+         Name[T.AG]                  0.168361  0.040685   4.138179  0.053732
+         Name[T.AGL1]                0.178144  0.040752   4.371403  0.048551
+         Name[T.AGL13]               0.168876  0.040688   4.150483  0.053439
+         Name[T.AGL15]               1.942850  0.040184  48.348710  0.000428
+         Name[T.AGL16]               0.159094  0.040625   3.916191  0.059449
+         Name[T.AGL25]               0.079289  0.040245   1.970180  0.187623
+         Name[T.AGL27]               0.862016  0.040500  21.284460  0.002200
+         Name[T.AGL3]                0.156004  0.040605   3.841978  0.061558
+         Name[T.AGL42]               0.178659  0.040756   4.383645  0.048300
+         Name[T.AGL55]               0.144677  0.040537   3.568979  0.070326
+         Name[T.AGL6]                0.176084  0.040738   4.322400  0.049578
+         Name[T.AGL63]               0.171965  0.040709   4.224238  0.051731
+         Name[T.AHL12]               0.178659  0.040756   4.383645  0.048300
+         Name[T.AHL20]               0.472262  0.045378  10.407222  0.009107
+         Name[T.AHL25]               2.407389  0.046653  51.601489  0.000375
+         Name[T.AIB]                 0.542799  0.044125  12.301402  0.006544
+         Name[T.AIL7]                0.178659  0.040756   4.383645  0.048300
+         Name[T.ANL2]                0.138499  0.040503   3.419508  0.075911
+         Name[T.ANT]                 0.055091  0.040179   1.371115  0.303918
+         Name[T.AP1]                 2.221522  0.050873  43.668244  0.000524
+         Name[T.AP3]                 0.178659  0.040756   4.383645  0.048300
+         Name[T.ARALYDRAFT\_484486]   0.147767  0.040555   3.643569  0.067760
+         Name[T.ARALYDRAFT\_493022]   0.078775  0.040243   1.957466  0.189417
+         Name[T.ARALYDRAFT\_495258]   1.673060  0.042215  39.632148  0.000636
+         {\ldots}                              {\ldots}       {\ldots}        {\ldots}       {\ldots}
+         Name[T.WRKY8]               0.015446  0.040123   0.384964  0.737347
+         Name[T.ZAP1]                0.168876  0.040688   4.150483  0.053439
+         Name[T.abi4]                0.168876  0.040688   4.150483  0.053439
+         Name[T.bHLH130]             0.172995  0.040716   4.248798  0.051179
+         Name[T.bHLH18]              0.144163  0.040535   3.556538  0.070768
+         Name[T.bHLH31]              0.178144  0.040752   4.371403  0.048551
+         Name[T.bHLH69]              0.163213  0.040651   4.014974  0.056801
+         Name[T.bHLH74]              0.175055  0.040730   4.297878  0.050103
+         Name[T.bHLH77]              0.176084  0.040738   4.322400  0.049578
+         Name[T.bHLH80]              0.174540  0.040727   4.285613  0.050369
+         Name[T.bZIP14]              1.715279  0.041718  41.116116  0.000591
+         Name[T.bZIP16]              0.178144  0.040752   4.371403  0.048551
+         Name[T.bZIP28]              0.177629  0.040748   4.359157  0.048805
+         Name[T.bZIP3]               1.114300  0.040380  27.595016  0.001311
+         Name[T.bZIP42]              0.177629  0.040748   4.359157  0.048805
+         Name[T.bZIP43]              1.150341  0.040571  28.353958  0.001242
+         Name[T.bZIP44]              0.102973  0.040331   2.553187  0.125229
+         Name[T.bZIP48]              0.177629  0.040748   4.359157  0.048805
+         Name[T.bZIP50]              0.177629  0.040748   4.359157  0.048805
+         Name[T.bZIP52]              0.169906  0.040695   4.175081  0.052860
+         Name[T.bZIP53]              1.114300  0.040380  27.595016  0.001311
+         Name[T.bZIP68]              0.169456  0.037196   4.555765  0.044957
+         Name[T.bZIP910]             3.686446  0.042050  87.667286  0.000130
+         Name[T.bZIP911]            22.878894  0.608937  37.571866  0.000708
+         Name[T.dof4.2]              0.178659  0.040756   4.383645  0.048300
+         Name[T.dof4.5]              0.178659  0.040756   4.383645  0.048300
+         Name[T.id1]                 1.087527  0.040272  27.004342  0.001368
+         Name[T.myb.Ph3]             7.481919  0.146950  50.914739  0.000386
+         Name[T.squamosa]           20.055878  0.561753  35.702287  0.000784
+         Genome                      0.000515  0.000021  24.886046  0.001611
+         
+         [487 rows x 4 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{enrichment}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{path\PYZus{}or\PYZus{}buf}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Enrichment Log.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{enrichment}\PY{p}{[}\PY{n}{enrichment}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}04}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}                        coef        SE           t   p-value
+         Name[T.AT3G10113]  6.664307  0.042325  157.453743  0.000040
+         Name[T.AT5G56840]  5.989832  0.057072  104.952791  0.000091
+         Name[T.At2g38090]  5.989832  0.057072  104.952791  0.000091
+         Name[T.CMTA2]      9.520789  0.071711  132.765330  0.000057
+         Name[T.HAT2]       6.664307  0.042325  157.453743  0.000040
+         Name[T.TCP14]      5.961515  0.057887  102.986225  0.000094
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{enrichment}\PY{p}{[}\PY{n}{enrichment}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{100}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}                        coef        SE           t   p-value
+         Name[T.AT3G10113]  6.664307  0.042325  157.453743  0.000040
+         Name[T.AT5G56840]  5.989832  0.057072  104.952791  0.000091
+         Name[T.At2g38090]  5.989832  0.057072  104.952791  0.000091
+         Name[T.CMTA2]      9.520789  0.071711  132.765330  0.000057
+         Name[T.HAT2]       6.664307  0.042325  157.453743  0.000040
+         Name[T.TCP14]      5.961515  0.057887  102.986225  0.000094
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genome}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} [<matplotlib.lines.Line2D at 0x7f1f1d3f0eb8>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} [<matplotlib.lines.Line2D at 0x7f1f1d38e9b0>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{width} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mf}{1.5}
+         \PY{n}{y} \PY{o}{=} \PY{n}{enrichment}\PY{p}{[}\PY{n}{enrichment}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}04}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{N} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}
+         \PY{n}{width} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mf}{1.5}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{width}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} plt.plot(enrichment[\PYZsq{}p\PYZhy{}value\PYZsq{}])}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <BarContainer object of 6 artists>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
